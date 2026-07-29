@@ -8,28 +8,39 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
+/* Palette "acqua" della serie: blu (#1565c0 / #4fc3f7) come colore guida,
+   teal (#00897b / #4db6ac) come secondario, sfondi blu-grigio.            */
 :root{
-  --bg:#f4f1ea; --bg2:#ece7dc; --surface:#fffdf7; --surface2:#f7f3ea;
-  --ink:#1b1a17; --ink2:#403d36; --muted:#6a655b; --line:#d8d1c2;
-  --accent:#0c6e75; --accent-ink:#ffffff; --accent-soft:#d8ecec;
-  --waveA:#1f5fa8; --waveB:#b5620c; --waveR:#0c6e75;
-  --ok:#0c6e75; --ok-soft:#d9ecec; --no:#9a4b06; --no-soft:#f6e6d2;
-  --shadow:0 1px 2px rgba(30,25,15,.06),0 8px 24px rgba(30,25,15,.06);
-  --grid:#e3ddcf;
+  --bg:#eef3f8; --bg-grad:#e3edf7; --bg2:#e3edf7;
+  --surface:#ffffff; --surface2:#f6f9fc;
+  --ink:#16202b; --ink2:#3a4a58; --muted:#52606d; --line:#dbe4ee;
+  --accent:#1565c0; --accent-ink:#ffffff; --accent-soft:#e4eefb;
+  --accent2:#00897b; --accent2-soft:#e0f2f1;
+  --acqua:#2196f3; --acqua-deep:#0d47a1; --particelle:#0d47a1;
+  --waveA:#1565c0; --waveB:#ef6c00; --waveR:#00897b;
+  --ok:#00897b; --ok-soft:#e0f2f1; --no:#ef6c00; --no-soft:#fdefe0;
+  --shadow:0 1px 2px rgba(22,32,43,.06),0 8px 24px rgba(22,32,43,.07);
+  --grid:#e3edf7;
 }
 html[data-theme="dark"]{
-  --bg:#111417; --bg2:#0c0f11; --surface:#181c20; --surface2:#1e232848;
-  --ink:#e7e5df; --ink2:#cfccc4; --muted:#98a0a6; --line:#2c3238;
-  --accent:#5cc2c9; --accent-ink:#0b1214; --accent-soft:#173436;
-  --waveA:#7aa9df; --waveB:#d99a55; --waveR:#5cc2c9;
-  --ok:#5cc2c9; --ok-soft:#15302f; --no:#d99a55; --no-soft:#332616;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
-  --grid:#242a30;
+  --bg:#0d1620; --bg-grad:#101d2b; --bg2:#101d2b;
+  --surface:#16232f; --surface2:#1b2a38;
+  --ink:#e7eef5; --ink2:#c4d2de; --muted:#9fb1c1; --line:#26394a;
+  --accent:#4fc3f7; --accent-ink:#0d1620; --accent-soft:#12293c;
+  --accent2:#4db6ac; --accent2-soft:#11302e;
+  --acqua:#4fc3f7; --acqua-deep:#0288d1; --particelle:#b3e5fc;
+  --waveA:#4fc3f7; --waveB:#ffa726; --waveR:#4db6ac;
+  --ok:#4db6ac; --ok-soft:#11302e; --no:#ffa726; --no-soft:#33260f;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.4);
+  --grid:#17273a;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
-  background:var(--bg); color:var(--ink);
+  background:var(--bg);
+  background-image:linear-gradient(160deg,var(--bg) 0%,var(--bg-grad) 100%);
+  background-attachment:fixed;
+  color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   font-size:16.5px; line-height:1.62;
   -webkit-text-size-adjust:100%;
@@ -96,7 +107,7 @@ nav.main{margin:20px 0 8px;border-bottom:1px solid var(--line);padding-bottom:2p
 .callout .lab{font-size:.76rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:2px}
 html[data-theme="dark"] .callout{background:var(--accent-soft)}
 .formula{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:6px 12px;margin:12px 0;overflow-x:auto}
-html[data-theme="dark"] .formula{background:#1d2226}
+html[data-theme="dark"] .formula{background:var(--surface2)}
 .katex{font-size:1.03em}
 .katex-display{margin:.5em 0}
 .mathfb{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:.01em}
@@ -128,7 +139,7 @@ input[type=range]{width:100%;accent-color:var(--accent);height:22px;margin:0}
 .btn:disabled{opacity:.42;cursor:not-allowed}
 .readouts{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
 .chip{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:5px 11px;font-size:.83rem;color:var(--ink2);font-variant-numeric:tabular-nums}
-html[data-theme="dark"] .chip{background:#1d2226}
+html[data-theme="dark"] .chip{background:var(--surface2)}
 .chip b{color:var(--accent);font-weight:700}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.83rem;color:var(--muted);margin-top:10px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -284,8 +295,8 @@ footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;co
         <line x1="30" y1="40" x2="30" y2="60" stroke="var(--waveB)" stroke-width="1.4"/>
         <line x1="300" y1="40" x2="300" y2="60" stroke="var(--waveB)" stroke-width="1.4"/>
         <text x="150" y="42" fill="var(--waveB)" text-anchor="middle">lunghezza d'onda &#955;</text>
-        <line x1="165" y1="95" x2="165" y2="50" stroke="var(--waveA)" stroke-width="1.4"/>
-        <text x="174" y="76" fill="var(--waveA)">A</text>
+        <line x1="165" y1="95" x2="165" y2="50" stroke="var(--waveR)" stroke-width="1.4"/>
+        <text x="174" y="76" fill="var(--waveR)">A</text>
         <text x="30" y="176" class="mut">posizione x (istantanea a t fissato)</text>
         <text x="580" y="112" class="mut" text-anchor="end">y</text>
       </svg>
@@ -452,9 +463,9 @@ footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;co
         <button class="btn" id="dReset" type="button">Riporta la sorgente a sinistra</button>
       </div>
       <div class="legend">
-        <span><i class="swatch" style="background:var(--waveA)"></i> fronti d'onda</span>
+        <span><i class="swatch" style="background:var(--acqua)"></i> fronti d'onda</span>
         <span><i class="swatch" style="background:var(--waveB)"></i> sorgente</span>
-        <span><i class="swatch" style="background:var(--accent)"></i> ascoltatore</span>
+        <span><i class="swatch" style="background:var(--accent2)"></i> ascoltatore</span>
       </div>
       <p class="simnote">Portando la velocità della sorgente oltre 343 m/s (Mach 1) compare il cono di Mach: la sorgente supera i propri fronti d'onda e la formula del Doppler non è più applicabile.</p>
     </div>
@@ -532,8 +543,8 @@ footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;co
         </g>
         <line x1="60" y1="70" x2="470" y2="115" stroke="var(--waveA)" stroke-width="2"/>
         <line x1="60" y1="170" x2="470" y2="115" stroke="var(--waveB)" stroke-width="2"/>
-        <circle cx="470" cy="115" r="5" fill="var(--accent)"/>
-        <text x="482" y="112" fill="var(--accent)">P</text>
+        <circle cx="470" cy="115" r="5" fill="var(--waveR)"/>
+        <text x="482" y="112" fill="var(--waveR)">P</text>
         <text x="250" y="80" fill="var(--waveA)">r&#8321;</text>
         <text x="250" y="163" fill="var(--waveB)">r&#8322;</text>
         <text x="300" y="215" class="mut" text-anchor="middle">&#916;r = |r&#8322; &#8722; r&#8321;| determina la fase relativa in P</text>
@@ -584,7 +595,7 @@ footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;co
       <div class="legend">
         <span><i class="swatch" style="background:var(--waveA)"></i> onda 1</span>
         <span><i class="swatch" style="background:var(--waveB)"></i> onda 2</span>
-        <span><i class="swatch" style="background:var(--accent)"></i> risultante</span>
+        <span><i class="swatch" style="background:var(--waveR)"></i> risultante</span>
         <span><i class="swatch" style="background:var(--muted)"></i> inviluppo (nei battimenti)</span>
       </div>
       <p class="simnote">Le frequenze sono nell'ordine di pochi hertz per rendere il fenomeno visibile: la matematica è identica a quella di due diapason da 440 e 443 Hz, semplicemente rallentata di un fattore cento. Nel preset "Battimenti" la linea tratteggiata è l'inviluppo 2A&#183;cos(&#960;&#916;f&#183;t): l'orecchio percepisce un massimo di volume ogni volta che l'inviluppo tocca un estremo, quindi &#916;f volte al secondo.</p>
@@ -643,12 +654,12 @@ footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;co
         <g stroke="var(--line)" stroke-width="1">
           <line x1="60" y1="45" x2="540" y2="45"/><line x1="60" y1="135" x2="540" y2="135"/><line x1="60" y1="225" x2="540" y2="225"/>
         </g>
-        <polyline data-sine data-cycles="0.5" data-amp="30" data-w="480" data-x0="60" data-y0="45" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
-        <polyline data-sine data-cycles="0.5" data-amp="-30" data-w="480" data-x0="60" data-y0="45" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
-        <polyline data-sine data-cycles="1" data-amp="30" data-w="480" data-x0="60" data-y0="135" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
-        <polyline data-sine data-cycles="1" data-amp="-30" data-w="480" data-x0="60" data-y0="135" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
-        <polyline data-sine data-cycles="1.5" data-amp="30" data-w="480" data-x0="60" data-y0="225" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
-        <polyline data-sine data-cycles="1.5" data-amp="-30" data-w="480" data-x0="60" data-y0="225" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        <polyline data-sine data-cycles="0.5" data-amp="30" data-w="480" data-x0="60" data-y0="45" fill="none" stroke="var(--waveR)" stroke-width="2.2"/>
+        <polyline data-sine data-cycles="0.5" data-amp="-30" data-w="480" data-x0="60" data-y0="45" fill="none" stroke="var(--waveA)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        <polyline data-sine data-cycles="1" data-amp="30" data-w="480" data-x0="60" data-y0="135" fill="none" stroke="var(--waveR)" stroke-width="2.2"/>
+        <polyline data-sine data-cycles="1" data-amp="-30" data-w="480" data-x0="60" data-y0="135" fill="none" stroke="var(--waveA)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        <polyline data-sine data-cycles="1.5" data-amp="30" data-w="480" data-x0="60" data-y0="225" fill="none" stroke="var(--waveR)" stroke-width="2.2"/>
+        <polyline data-sine data-cycles="1.5" data-amp="-30" data-w="480" data-x0="60" data-y0="225" fill="none" stroke="var(--waveA)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
         <g fill="var(--waveB)">
           <circle cx="60" cy="45" r="4"/><circle cx="540" cy="45" r="4"/>
           <circle cx="60" cy="135" r="4"/><circle cx="300" cy="135" r="4"/><circle cx="540" cy="135" r="4"/>
@@ -710,7 +721,7 @@ footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;co
         <button class="btn" id="zPause" type="button">Pausa</button>
       </div>
       <div class="legend">
-        <span><i class="swatch" style="background:var(--accent)"></i> spostamento istantaneo</span>
+        <span><i class="swatch" style="background:var(--waveR)"></i> spostamento istantaneo</span>
         <span><i class="swatch" style="background:var(--waveA)"></i> inviluppo</span>
         <span><i class="swatch" style="background:var(--waveB)"></i> nodi</span>
       </div>
@@ -916,7 +927,7 @@ function pauseBtn(btn,sim){
     var k=2*Math.PI*st.f/st.v, om=2*Math.PI*st.f;
     var scaleA=Math.min(plotH*0.34/2.5, 42); // px per cm
     var amp=st.A*scaleA;
-    var col=cssv('--accent'), colB=cssv('--waveB'), colA=cssv('--waveA');
+    var col=cssv('--accent'), colB=cssv('--waveB'), colA=cssv('--accent2');
 
     // griglia orizzontale
     ctx.strokeStyle=cssv('--grid'); ctx.lineWidth=1;
@@ -937,7 +948,7 @@ function pauseBtn(btn,sim){
       for(var i=0;i<=WIN*4;i++){
         var xm=i/4, sx=pad+xm*pxPerM;
         var sy=mid-amp*Math.sin(k*xm-om*st.t);
-        ctx.fillStyle=cssv('--muted'); ctx.globalAlpha=.55;
+        ctx.fillStyle=cssv('--particelle'); ctx.globalAlpha=.5;
         ctx.beginPath(); ctx.arc(sx,sy,2.2,0,6.2832); ctx.fill(); ctx.globalAlpha=1;
       }
       var my=mid-amp*Math.sin(k*XMARK-om*st.t), mx=pad+XMARK*pxPerM;
@@ -1117,8 +1128,8 @@ function pauseBtn(btn,sim){
       var R=(st.t-fr.t0)*vSoundPx;
       if(R<=0) return;
       var age=Math.min(1,R/(w*0.9));
-      ctx.strokeStyle=cssv('--waveA');
-      ctx.globalAlpha=Math.max(.12,0.75-0.62*age);
+      ctx.strokeStyle=cssv('--acqua');
+      ctx.globalAlpha=Math.max(.14,0.8-0.62*age);
       ctx.lineWidth=1.6;
       ctx.beginPath(); ctx.arc(fr.x,fr.y,R,0,6.2832); ctx.stroke();
     });
@@ -1142,9 +1153,9 @@ function pauseBtn(btn,sim){
     label(ctx,'sorgente',st.sx,lineY-14,cssv('--waveB'),'center',11);
 
     // osservatore
-    ctx.fillStyle=cssv('--accent');
+    ctx.fillStyle=cssv('--accent2');
     ctx.beginPath(); ctx.moveTo(obs.x,obs.y-9); ctx.lineTo(obs.x+8,obs.y+7); ctx.lineTo(obs.x-8,obs.y+7); ctx.closePath(); ctx.fill();
-    label(ctx,'ascoltatore',obs.x,obs.y+22,cssv('--accent'),'center',11);
+    label(ctx,'ascoltatore',obs.x,obs.y+22,cssv('--accent2'),'center',11);
 
     // frequenza percepita
     var dx=obs.x-st.sx, dy=obs.y-lineY, d=Math.sqrt(dx*dx+dy*dy)||1;
@@ -1223,7 +1234,7 @@ function pauseBtn(btn,sim){
     var ampU=Math.min(topH*0.19,46);      // px per unità di ampiezza (pannello alto)
     var ampD=Math.min(botH*0.165,42);     // pannello basso (fondo scala 3 unità)
     var dp=st.ph*Math.PI/180;
-    var cA=cssv('--waveA'), cB=cssv('--waveB'), cR=cssv('--accent'), cM=cssv('--muted');
+    var cA=cssv('--waveA'), cB=cssv('--waveB'), cR=cssv('--waveR'), cM=cssv('--muted');
     var N=Math.max(160,Math.floor(w-2*pad));
 
     ctx.strokeStyle=cssv('--line'); ctx.lineWidth=1;
@@ -1337,7 +1348,7 @@ function pauseBtn(btn,sim){
     var mid=h*0.48;
     var n=nearestN(), R=response(n);
     var A=Math.min(h*0.30,80)*R;
-    var cR=cssv('--accent'), cA=cssv('--waveA'), cB=cssv('--waveB'), cM=cssv('--muted');
+    var cR=cssv('--waveR'), cA=cssv('--waveA'), cB=cssv('--waveB'), cM=cssv('--muted');
     var tube=isTube();
 
     function shape(u){ // u in [0,1]
