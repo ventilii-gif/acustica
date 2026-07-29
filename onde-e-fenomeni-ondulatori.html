@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onde e fenomeni ondulatori</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --bg:#f4f1ea; --bg2:#ece7dc; --surface:#fffdf7; --surface2:#f7f3ea;
+  --ink:#1b1a17; --ink2:#403d36; --muted:#6a655b; --line:#d8d1c2;
+  --accent:#0c6e75; --accent-ink:#ffffff; --accent-soft:#d8ecec;
+  --waveA:#1f5fa8; --waveB:#b5620c; --waveR:#0c6e75;
+  --ok:#0c6e75; --ok-soft:#d9ecec; --no:#9a4b06; --no-soft:#f6e6d2;
+  --shadow:0 1px 2px rgba(30,25,15,.06),0 8px 24px rgba(30,25,15,.06);
+  --grid:#e3ddcf;
+}
+html[data-theme="dark"]{
+  --bg:#111417; --bg2:#0c0f11; --surface:#181c20; --surface2:#1e232848;
+  --ink:#e7e5df; --ink2:#cfccc4; --muted:#98a0a6; --line:#2c3238;
+  --accent:#5cc2c9; --accent-ink:#0b1214; --accent-soft:#173436;
+  --waveA:#7aa9df; --waveB:#d99a55; --waveR:#5cc2c9;
+  --ok:#5cc2c9; --ok-soft:#15302f; --no:#d99a55; --no-soft:#332616;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --grid:#242a30;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16.5px; line-height:1.62;
+  -webkit-text-size-adjust:100%;
+  transition:background-color .5s ease, color .5s ease;
+}
+body,.card,.panel,.chip,.btn,.subnav-btn,.nav-btn,.opt,.callout,.exbox,table,th,td,input,select{
+  transition:background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 64px}
+header.site{padding:30px 0 10px}
+.titlebar{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;justify-content:space-between}
+h1{font-family:Georgia,"Iowan Old Style",'Times New Roman',serif;font-weight:600;font-size:clamp(1.55rem,4.4vw,2.3rem);line-height:1.18;margin:0 0 6px}
+.sub{color:var(--muted);font-size:.95rem;margin:0;max-width:62ch}
+h2{font-family:Georgia,serif;font-size:clamp(1.2rem,3vw,1.55rem);margin:1.6em 0 .5em;line-height:1.25}
+h2:first-child{margin-top:.2em}
+h3{font-size:1.02rem;margin:1.5em 0 .4em;letter-spacing:.01em}
+h4{font-size:.95rem;margin:1.2em 0 .3em;color:var(--ink2)}
+p{margin:.65em 0}
+.prose{font-family:Georgia,"Iowan Old Style",'Times New Roman',serif;font-size:1.03rem;color:var(--ink2)}
+.prose p{margin:.8em 0}
+ul,ol{margin:.6em 0 .6em 1.1em;padding-left:.4em}
+li{margin:.32em 0}
+small,.small{font-size:.86rem;color:var(--muted)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+a{color:var(--accent)}
+
+/* ---------- theme toggle ---------- */
+.theme-toggle{
+  display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink2);border-radius:999px;padding:7px 14px 7px 9px;
+  cursor:pointer;font-size:.86rem;font-weight:600;letter-spacing:.02em;box-shadow:var(--shadow);
+  flex:0 0 auto;
+}
+.theme-toggle:hover{border-color:var(--accent)}
+.tt-track{position:relative;width:34px;height:18px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);flex:0 0 auto}
+.tt-knob{position:absolute;top:1px;left:1px;width:14px;height:14px;border-radius:50%;background:var(--accent);
+  transition:transform .5s cubic-bezier(.65,.02,.24,1), background-color .5s ease}
+html[data-theme="dark"] .tt-knob{transform:translateX(16px)}
+
+/* ---------- navigation ---------- */
+nav.main{margin:20px 0 8px;border-bottom:1px solid var(--line);padding-bottom:2px}
+.nav-row{display:flex;gap:6px;flex-wrap:wrap}
+.nav-btn{
+  appearance:none;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);
+  font:inherit;font-size:.92rem;font-weight:600;padding:9px 13px;border-radius:9px 9px 0 0;cursor:pointer;
+  margin-bottom:-1px;
+}
+.nav-btn:hover{color:var(--ink)}
+.nav-btn[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--accent);border-bottom:1px solid var(--surface)}
+.subnav{display:flex;gap:8px;overflow-x:auto;padding:14px 2px 14px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.subnav-btn{
+  appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink2);
+  font:inherit;font-size:.86rem;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;
+}
+.subnav-btn:hover{border-color:var(--accent)}
+.subnav-btn[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.panel[hidden],.subpanel[hidden]{display:none}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px;box-shadow:var(--shadow);margin:16px 0}
+.card.tight{padding:14px 15px}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;padding:12px 15px;margin:16px 0}
+.callout p{margin:.35em 0}
+.callout .lab{font-size:.76rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:2px}
+html[data-theme="dark"] .callout{background:var(--accent-soft)}
+.formula{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:6px 12px;margin:12px 0;overflow-x:auto}
+html[data-theme="dark"] .formula{background:#1d2226}
+.katex{font-size:1.03em}
+.katex-display{margin:.5em 0}
+.mathfb{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:.01em}
+.mathfb.disp{display:block;text-align:center;font-size:1.06em;padding:5px 0;font-style:normal}
+
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:12px 0;display:block;overflow-x:auto;white-space:nowrap}
+th,td{border-bottom:1px solid var(--line);padding:7px 12px 7px 0;text-align:left}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+td.num{font-variant-numeric:tabular-nums}
+
+/* ---------- simulation ---------- */
+.simwrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);margin:16px 0}
+canvas{display:block;width:100%;height:340px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);touch-action:pan-y}
+canvas.short{height:210px}
+canvas.tall{height:400px}
+@media(max-width:640px){canvas{height:260px}canvas.short{height:180px}canvas.tall{height:300px}}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 18px;margin-top:14px}
+.ctl label{display:block;font-size:.79rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.ctl .val{float:right;text-transform:none;letter-spacing:0;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent);height:22px;margin:0}
+.segmented{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex-wrap:wrap}
+.segmented button{appearance:none;border:none;background:var(--surface);color:var(--ink2);font:inherit;font-size:.82rem;font-weight:600;padding:7px 13px;cursor:pointer}
+.segmented button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink2);font:inherit;font-size:.85rem;font-weight:600;padding:8px 15px;border-radius:9px;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{color:var(--accent-ink);opacity:.9}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.readouts{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.chip{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:5px 11px;font-size:.83rem;color:var(--ink2);font-variant-numeric:tabular-nums}
+html[data-theme="dark"] .chip{background:#1d2226}
+.chip b{color:var(--accent);font-weight:700}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.83rem;color:var(--muted);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:14px;height:3px;border-radius:2px;display:inline-block}
+.simnote{font-size:.85rem;color:var(--muted);margin-top:10px}
+
+/* ---------- exercises ---------- */
+.exbox{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0;background:var(--surface)}
+.exhead{display:flex;gap:10px;align-items:baseline}
+.exnum{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);flex:0 0 auto}
+.exbody{margin:.2em 0 .1em}
+.reveal{border-top:1px dashed var(--line);margin-top:12px;padding-top:11px;font-size:.95rem;color:var(--ink2)}
+.reveal[hidden]{display:none}
+.reveal .lab{font-size:.73rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
+
+/* ---------- quiz ---------- */
+.quizbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-bottom:6px}
+.qmeta{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{width:10px;height:10px;border-radius:50%;border:1px solid var(--line);background:var(--surface2);cursor:pointer;padding:0;appearance:none}
+.dot.done{background:var(--muted);border-color:var(--muted)}
+.dot.good{background:var(--ok);border-color:var(--ok)}
+.dot.bad{background:var(--no);border-color:var(--no)}
+.dot.cur{outline:2px solid var(--accent);outline-offset:2px}
+.qtext{font-family:Georgia,serif;font-size:1.06rem;margin:10px 0 14px;line-height:1.5}
+.qkind{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;border:1px solid var(--line);background:var(--surface);
+  color:var(--ink);font:inherit;font-size:.96rem;padding:11px 14px;border-radius:10px;cursor:pointer;line-height:1.45}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .k{flex:0 0 auto;font-weight:700;color:var(--muted);font-size:.85rem;line-height:1.6}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--ok);background:var(--ok-soft)}
+.opt.correct .k{color:var(--ok)}
+.opt.chosen-wrong{border-color:var(--no);background:var(--no-soft)}
+.opt.chosen-wrong .k{color:var(--no)}
+.fb{margin-top:14px;border-radius:10px;padding:12px 14px;border:1px solid var(--line);font-size:.95rem}
+.fb.good{border-color:var(--ok);background:var(--ok-soft)}
+.fb.bad{border-color:var(--no);background:var(--no-soft)}
+.fb .lab{display:block;font-size:.75rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:3px}
+.fb.good .lab{color:var(--ok)}
+.fb.bad .lab{color:var(--no)}
+.navq{display:flex;gap:8px;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
+.score{font-family:Georgia,serif;font-size:1.5rem;margin:6px 0}
+.bar{height:9px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);overflow:hidden;margin:10px 0 4px}
+.bar>i{display:block;height:100%;background:var(--accent);transition:width .6s ease}
+
+svg.diagram{display:block;width:100%;height:auto;max-width:660px;margin:14px auto;overflow:visible}
+svg.diagram text{font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:12px;fill:var(--ink2)}
+svg.diagram .mut{fill:var(--muted);font-size:11px}
+.hr{height:1px;background:var(--line);border:0;margin:26px 0}
+footer.site{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;color:var(--muted);font-size:.84rem}
+.skip{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <div class="titlebar">
+    <div>
+      <h1>Onde e fenomeni ondulatori</h1>
+      <p class="sub">Percorso interattivo di fisica per il quinto anno del liceo scientifico: onde meccaniche, acustica, sovrapposizione e onde stazionarie. Teoria, simulazioni animate, esercizi e quiz.</p>
+    </div>
+    <button class="theme-toggle" id="themeBtn" type="button" aria-label="Cambia tema chiaro/scuro">
+      <span class="tt-track"><span class="tt-knob"></span></span>
+      <span id="themeLabel">Giorno</span>
+    </button>
+  </div>
+</header>
+
+<nav class="main" aria-label="Aree tematiche">
+  <div class="nav-row" role="tablist" id="mainTabs">
+    <button class="nav-btn" role="tab" data-area="storia" aria-selected="true">Introduzione storica</button>
+    <button class="nav-btn" role="tab" data-area="mecc" aria-selected="false">Onde meccaniche</button>
+    <button class="nav-btn" role="tab" data-area="suono" aria-selected="false">Onde sonore</button>
+    <button class="nav-btn" role="tab" data-area="sovr" aria-selected="false">Sovrapposizione e battimenti</button>
+    <button class="nav-btn" role="tab" data-area="staz" aria-selected="false">Onde stazionarie</button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ======================= INTRODUZIONE STORICA ======================= -->
+<section class="panel" id="panel-storia" role="tabpanel">
+  <div class="card">
+    <h2>Come siamo arrivati all'idea di onda</h2>
+    <div class="prose">
+      <p>Il concetto di onda non è nato in un laboratorio: è nato guardando l'acqua. Chi osserva un sasso cadere in uno stagno vede una perturbazione che si allarga in cerchi mentre un galleggiante, sulla superficie, si limita a salire e scendere. Quel galleggiante è la prima lezione di fisica delle onde: <em>si propaga la perturbazione, non la materia</em>. Tutto quello che studierai in questa app è, in fondo, l'elaborazione matematica di quella osservazione.</p>
+
+      <h3>Corde, numeri e il primo laboratorio di acustica</h3>
+      <p>Già la scuola pitagorica (VI secolo a.C.) aveva scoperto, con il monocordo, che gli intervalli musicali consonanti corrispondono a rapporti semplici fra lunghezze di corda: 2:1 per l'ottava, 3:2 per la quinta. Era un risultato sperimentale corretto, ma interpretato in chiave numerologica; mancava l'idea che il suono fosse un <em>movimento</em>. L'intuizione arriva con gli Stoici e viene formulata con chiarezza dall'architetto romano <strong>Vitruvio</strong> (I secolo a.C.), che nel <em>De architectura</em> paragona esplicitamente la voce che si diffonde nel teatro alle onde circolari sull'acqua — e da quell'analogia ricava criteri di progettazione acustica.</p>
+
+      <h3>Il Seicento: il suono diventa misurabile</h3>
+      <p>La svolta è seicentesca. <strong>Galileo Galilei</strong>, nei <em>Discorsi</em> (1638), lega in modo esplicito l'altezza di un suono alla frequenza delle vibrazioni, mostrando con lo scalpello sul metallo e con le corde che a "vibrazioni più fitte" corrisponde un suono più acuto. Negli stessi anni <strong>Marin Mersenne</strong> stabilisce le leggi delle corde vibranti (la frequenza cresce con la tensione, diminuisce con lunghezza e densità) e realizza la prima misura ragionevole della velocità del suono in aria, cronometrando l'intervallo fra il lampo e il rimbombo di un'arma da fuoco a distanza nota. Poco dopo <strong>Robert Boyle</strong> mostra che una campanella suonata dentro un recipiente in cui si fa il vuoto smette di farsi sentire: il suono, a differenza della luce, ha bisogno di un mezzo.</p>
+      <p>Resta un problema aperto per un secolo. <strong>Isaac Newton</strong> ricava teoricamente la velocità del suono nei <em>Principia</em> (1687), ma il suo valore è circa il 15% più basso di quello misurato. La discrepanza viene risolta solo nel 1816 da <strong>Pierre-Simon Laplace</strong>: le compressioni e rarefazioni sonore sono così rapide che il gas non ha tempo di scambiare calore, quindi il processo è adiabatico e non isotermo. È un esempio istruttivo di come un errore quantitativo persistente sia il sintomo di un modello fisico incompleto, non di una misura sbagliata.</p>
+
+      <h3>Il dibattito onda/particella</h3>
+      <p>Parallelamente, sulla natura della luce si consuma la controversia più lunga della fisica. <strong>Christiaan Huygens</strong> (1690) propone un modello ondulatorio con il suo principio delle sorgenti secondarie, che spiega elegantemente riflessione e rifrazione; Newton preferisce un modello corpuscolare, anche perché la luce sembra non aggirare gli ostacoli come fa il suono. L'autorità di Newton congela la questione per un secolo, finché nel 1801 <strong>Thomas Young</strong> realizza l'esperimento della doppia fenditura: due fasci di luce che si sommano possono dare <em>buio</em>. Un fenomeno del genere è inspiegabile con proiettili e naturale con onde — l'interferenza diventa la firma inconfondibile del comportamento ondulatorio, quella che riconoscerai anche nei battimenti sonori. <strong>Augustin Fresnel</strong> completa l'impianto matematico negli anni Venti dell'Ottocento.</p>
+      <p>La storia però non finisce lì, e vale la pena saperlo: fra il 1900 e il 1924, con Planck, Einstein e de Broglie, si scopre che la contrapposizione era mal posta. Luce e materia mostrano, a seconda dell'esperimento, proprietà ondulatorie o corpuscolari. Le onde meccaniche che studi qui restano descritte perfettamente dalla fisica classica: sono però il vocabolario — lunghezza d'onda, frequenza, interferenza — con cui è stata scritta anche la meccanica quantistica.</p>
+
+      <h3>Vedere le vibrazioni: Chladni</h3>
+      <p>Nel 1787 <strong>Ernst Chladni</strong> pubblica un'idea semplice e spettacolare: cosparge di sabbia fine una lastra metallica e la fa vibrare con un archetto. La sabbia viene espulsa dalle zone che oscillano e si accumula lungo le linee ferme, disegnando figure geometriche regolari che cambiano al cambiare della frequenza. Sono i <em>nodi</em> dei modi normali della lastra, resi visibili. Chladni portò le sue lastre in tournée per l'Europa fino a Napoleone; il problema matematico che aveva posto — prevedere quelle figure — fu risolto da <strong>Sophie Germain</strong>, con un lavoro sulle superfici elastiche premiato dall'Académie nel 1816. Quando nella quarta area vedrai i modi normali di una corda, ricorda che stai guardando la versione unidimensionale delle figure di Chladni.</p>
+
+      <h3>Doppler e la verifica sui binari</h3>
+      <p>Nel 1842 <strong>Christian Doppler</strong>, a Praga, pubblica <em>Über das farbige Licht der Doppelsterne</em>: se sorgente e osservatore sono in moto relativo, la frequenza ricevuta differisce da quella emessa. Doppler pensava soprattutto alla luce delle stelle e su quel punto sbagliava alcune conclusioni, ma il meccanismo per il suono era corretto. La verifica sperimentale, nel 1845, è rimasta celebre: il meteorologo olandese <strong>Christophorus Buys Ballot</strong> fece sistemare dei trombettisti su un vagone della linea Utrecht-Amsterdam, con altri musicisti a bordo binario incaricati di annotare la nota percepita al passaggio. Lo scarto di altezza era esattamente quello previsto. Oggi lo stesso effetto misura la velocità del sangue con l'ecodoppler e l'espansione dell'universo con il redshift.</p>
+
+      <h3>Helmholtz: dall'orecchio alla matematica</h3>
+      <p>Il quadro moderno dell'acustica lo costruisce <strong>Hermann von Helmholtz</strong> con <em>Die Lehre von den Tonempfindungen</em> (1863). Helmholtz, medico e fisico, mostra che il <em>timbro</em> — ciò che distingue un violino da un flauto sulla stessa nota — dipende dalle ampiezze relative delle armoniche superiori, cioè dalla scomposizione in serie di Fourier dell'onda sonora; costruisce risuonatori sferici per isolare singole componenti e propone una teoria della risonanza dell'orecchio interno che è l'antenata delle nostre conoscenze sulla coclea. Con Helmholtz l'acustica diventa fisica matematica e fisiologia insieme. Poco dopo <strong>Lord Rayleigh</strong> sistema l'intera disciplina nei due volumi di <em>The Theory of Sound</em> (1877-78), e all'inizio del Novecento <strong>Wallace Sabine</strong> fonda l'acustica architettonica misurando il tempo di riverbero delle sale.</p>
+
+      <div class="callout">
+        <span class="lab">Da tenere presente</span>
+        <p>Molti passaggi di questa storia sono durati decenni perché richiedevano di immaginare la somma di due grandezze che variano nel tempo. Se interferenza e battimenti ti sembrano astratti al primo incontro, sei in ottima compagnia: è una difficoltà di rappresentazione, non di calcolo. Le simulazioni di questa app servono esattamente a questo — far vedere in movimento ciò che le formule descrivono.</p>
+      </div>
+    </div>
+    <div class="btnrow">
+      <button class="btn primary" data-goto="mecc">Inizia da: Onde meccaniche</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ONDE MECCANICHE ======================= -->
+<section class="panel" id="panel-mecc" role="tabpanel" hidden>
+  <div class="subnav" role="tablist" aria-label="Sottoschede onde meccaniche">
+    <button class="subnav-btn" role="tab" data-sub="mecc|teoria" aria-selected="true">Teoria</button>
+    <button class="subnav-btn" role="tab" data-sub="mecc|sim" aria-selected="false">Simulazione</button>
+    <button class="subnav-btn" role="tab" data-sub="mecc|es" aria-selected="false">Esercizi</button>
+    <button class="subnav-btn" role="tab" data-sub="mecc|quiz" aria-selected="false">Quiz</button>
+  </div>
+
+  <div class="subpanel" id="sub-mecc-teoria">
+    <div class="card prose">
+      <h2>Onde meccaniche: definizioni e grandezze</h2>
+      <p>Un'<strong>onda meccanica</strong> è la propagazione di una perturbazione in un mezzo elastico. Il punto essenziale, e quello che sfugge più spesso, è questo: le particelle del mezzo oscillano attorno alla propria posizione di equilibrio e non accompagnano l'onda. Ciò che viaggia è lo <em>stato di perturbazione</em>, e con esso energia e quantità di moto. Il tappo di sughero sull'acqua sale e scende mentre l'onda passa oltre; il tuo timpano vibra avanti e indietro mentre il suono prosegue nella stanza.</p>
+
+      <h3>Onde trasversali e longitudinali</h3>
+      <ul>
+        <li><strong>Trasversali</strong>: le particelle oscillano perpendicolarmente alla direzione di propagazione (corda scossa, onde sismiche S, onde elettromagnetiche — queste ultime non meccaniche). Richiedono che il mezzo resista allo scorrimento: per questo <em>non si propagano nei fluidi</em>.</li>
+        <li><strong>Longitudinali</strong>: le particelle oscillano lungo la direzione di propagazione, generando compressioni e rarefazioni (molla slinky, suono, onde sismiche P). Si propagano in solidi, liquidi e gas.</li>
+      </ul>
+      <p>Alcune onde reali sono miste: le onde sul mare in acqua profonda fanno descrivere alle particelle traiettorie circolari, combinazione delle due componenti.</p>
+
+      <h3>L'onda armonica</h3>
+      <p>Se la sorgente compie un moto armonico semplice, ogni punto del mezzo compie a sua volta un moto armonico semplice, ritardato rispetto alla sorgente. La descrizione matematica di un'onda armonica progressiva che viaggia nel verso positivo dell'asse \(x\) è</p>
+      <div class="formula">\[ y(x,t)=A\,\sin\!\big(kx-\omega t+\varphi_0\big) \]</div>
+      <p>dove \(y\) è lo spostamento dall'equilibrio (trasversale o longitudinale a seconda del caso), \(A\) l'ampiezza, \(k\) il numero d'onda, \(\omega\) la pulsazione, \(\varphi_0\) la fase iniziale. Il segno meno davanti a \(\omega t\) indica propagazione verso \(x\) crescenti: per un'onda regressiva si usa \(kx+\omega t\).</p>
+
+      <svg class="diagram" viewBox="0 0 600 190" role="img" aria-label="Istantanea di un'onda armonica con ampiezza e lunghezza d'onda">
+        <line x1="20" y1="95" x2="580" y2="95" stroke="var(--line)" stroke-width="1"/>
+        <polyline data-sine data-cycles="2" data-amp="45" data-w="540" data-x0="30" data-y0="95"
+                  fill="none" stroke="var(--accent)" stroke-width="2.4"/>
+        <line x1="30" y1="50" x2="300" y2="50" stroke="var(--waveB)" stroke-width="1" stroke-dasharray="4 3"/>
+        <line x1="30" y1="40" x2="30" y2="60" stroke="var(--waveB)" stroke-width="1.4"/>
+        <line x1="300" y1="40" x2="300" y2="60" stroke="var(--waveB)" stroke-width="1.4"/>
+        <text x="150" y="42" fill="var(--waveB)" text-anchor="middle">lunghezza d'onda &#955;</text>
+        <line x1="165" y1="95" x2="165" y2="50" stroke="var(--waveA)" stroke-width="1.4"/>
+        <text x="174" y="76" fill="var(--waveA)">A</text>
+        <text x="30" y="176" class="mut">posizione x (istantanea a t fissato)</text>
+        <text x="580" y="112" class="mut" text-anchor="end">y</text>
+      </svg>
+
+      <h3>Le grandezze caratteristiche</h3>
+      <table>
+        <tr><th>Grandezza</th><th>Simbolo</th><th>Definizione</th><th>Unità SI</th></tr>
+        <tr><td>Ampiezza</td><td>A</td><td>massimo spostamento dall'equilibrio</td><td>m</td></tr>
+        <tr><td>Lunghezza d'onda</td><td>&#955;</td><td>periodo spaziale: distanza fra due punti in fase</td><td>m</td></tr>
+        <tr><td>Periodo</td><td>T</td><td>durata di un'oscillazione completa</td><td>s</td></tr>
+        <tr><td>Frequenza</td><td>f = 1/T</td><td>oscillazioni al secondo</td><td>Hz</td></tr>
+        <tr><td>Pulsazione</td><td>&#969; = 2&#960;f</td><td>frequenza angolare</td><td>rad/s</td></tr>
+        <tr><td>Numero d'onda</td><td>k = 2&#960;/&#955;</td><td>fase per unità di lunghezza</td><td>rad/m</td></tr>
+        <tr><td>Velocità di propagazione</td><td>v</td><td>velocità del profilo d'onda</td><td>m/s</td></tr>
+      </table>
+
+      <p>Dalla condizione che il profilo avanzi di una lunghezza d'onda in un periodo segue la <strong>relazione fondamentale</strong>:</p>
+      <div class="formula">\[ v=\frac{\lambda}{T}=\lambda f=\frac{\omega}{k} \]</div>
+
+      <div class="callout">
+        <span class="lab">Punto critico</span>
+        <p>La velocità \(v\) è determinata <em>solo dalle proprietà del mezzo</em>; la frequenza \(f\) è imposta <em>solo dalla sorgente</em>. Di conseguenza, quando un'onda passa da un mezzo a un altro la frequenza resta invariata e a cambiare è la lunghezza d'onda, secondo \(\lambda=v/f\). È l'errore più diffuso nei compiti: non è \(v\) a dipendere da \(f\).</p>
+      </div>
+
+      <h3>Velocità in una corda tesa</h3>
+      <div class="formula">\[ v=\sqrt{\frac{F}{\mu}}\qquad \mu=\frac{m}{L} \]</div>
+      <p>con \(F\) tensione della corda e \(\mu\) densità lineare di massa (kg/m). La struttura della formula si ritrova in tutti i mezzi elastici: al numeratore una grandezza che misura la <em>rigidità</em> (forza di richiamo), al denominatore una che misura l'<em>inerzia</em>.</p>
+
+      <h3>Equazione delle onde ed energia</h3>
+      <p>Ogni funzione della forma \(y=f(x\mp vt)\) soddisfa l'equazione di d'Alembert</p>
+      <div class="formula">\[ \frac{\partial^2 y}{\partial x^2}=\frac{1}{v^2}\,\frac{\partial^2 y}{\partial t^2} \]</div>
+      <p>che è lineare: da qui discende il principio di sovrapposizione della terza area. La potenza media trasportata da un'onda armonica su una corda vale</p>
+      <div class="formula">\[ \langle P\rangle=\tfrac{1}{2}\,\mu\, v\, \omega^2 A^2 \]</div>
+      <p>Ritieni soprattutto la dipendenza: <strong>l'energia trasportata è proporzionale al quadrato dell'ampiezza e al quadrato della frequenza</strong>. Raddoppiare l'ampiezza quadruplica l'energia.</p>
+
+      <h3>Fronti d'onda</h3>
+      <p>Il luogo dei punti che oscillano in fase è un <em>fronte d'onda</em>. Una sorgente puntiforme in tre dimensioni genera fronti sferici; a grande distanza una porzione di fronte sferico è ben approssimata da un'onda piana. I raggi sono le linee perpendicolari ai fronti e indicano la direzione di propagazione.</p>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-mecc-sim" hidden>
+    <div class="simwrap">
+      <h2 style="margin-top:0">Generatore di onde</h2>
+      <p class="small" style="margin-top:-6px">Osserva come cambiano forma d'onda e grandezze caratteristiche. I punti evidenziati mostrano il moto delle singole particelle del mezzo: nota che oscillano sul posto mentre il profilo avanza.</p>
+      <div class="segmented" role="group" aria-label="Tipo di onda">
+        <button type="button" data-mecc-mode="trasv" aria-pressed="true">Trasversale</button>
+        <button type="button" data-mecc-mode="long" aria-pressed="false">Longitudinale</button>
+      </div>
+      <canvas id="cvMecc" class="tall" aria-label="Simulazione di onda meccanica in propagazione"></canvas>
+      <div class="controls">
+        <div class="ctl"><label for="mAmp">Ampiezza <span class="val" id="mAmpV">1,00 cm</span></label><input type="range" id="mAmp" min="0.2" max="2.5" step="0.05" value="1"></div>
+        <div class="ctl"><label for="mFreq">Frequenza <span class="val" id="mFreqV">1,00 Hz</span></label><input type="range" id="mFreq" min="0.2" max="4" step="0.05" value="1"></div>
+        <div class="ctl"><label for="mVel">Velocità <span class="val" id="mVelV">2,00 m/s</span></label><input type="range" id="mVel" min="0.4" max="6" step="0.05" value="2"></div>
+      </div>
+      <div class="readouts">
+        <span class="chip">&#955; = <b id="mLam">2,00 m</b></span>
+        <span class="chip">T = <b id="mPer">1,00 s</b></span>
+        <span class="chip">k = <b id="mK">3,14 rad/m</b></span>
+        <span class="chip">&#969; = <b id="mOm">6,28 rad/s</b></span>
+        <span class="chip">E &#8733; A&#178;f&#178; &#8594; <b id="mEn">1,00</b> (rel.)</span>
+      </div>
+      <div class="btnrow">
+        <button class="btn" id="mPause" type="button">Pausa</button>
+        <button class="btn" id="mTrace" type="button" aria-pressed="false">Mostra oscillazione nel tempo</button>
+      </div>
+      <p class="simnote">Il riquadro inferiore, quando attivo, registra lo spostamento del punto arancione in funzione del tempo: lì il periodo spaziale &#955; diventa il periodo temporale T. Sono due grafici diversi della stessa onda, e confonderli è un classico: sull'asse orizzontale c'è <em>x</em> nel primo, <em>t</em> nel secondo.</p>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-mecc-es" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Esercizi</h2>
+      <p class="small">Prova a risolvere con carta e penna prima di aprire il suggerimento. Il suggerimento indica la strada, la soluzione mostra i passaggi.</p>
+      <div id="es-mecc"></div>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-mecc-quiz" hidden>
+    <div class="card" id="quiz-mecc"></div>
+  </div>
+</section>
+
+<!-- ======================= ONDE SONORE ======================= -->
+<section class="panel" id="panel-suono" role="tabpanel" hidden>
+  <div class="subnav" role="tablist" aria-label="Sottoschede onde sonore">
+    <button class="subnav-btn" role="tab" data-sub="suono|teoria" aria-selected="true">Teoria</button>
+    <button class="subnav-btn" role="tab" data-sub="suono|sim" aria-selected="false">Simulazione</button>
+    <button class="subnav-btn" role="tab" data-sub="suono|es" aria-selected="false">Esercizi</button>
+    <button class="subnav-btn" role="tab" data-sub="suono|quiz" aria-selected="false">Quiz</button>
+  </div>
+
+  <div class="subpanel" id="sub-suono-teoria">
+    <div class="card prose">
+      <h2>Onde sonore</h2>
+      <p>Il suono è un'onda meccanica <strong>longitudinale</strong> di pressione. La sorgente vibrando comprime lo strato d'aria adiacente; quello strato, comprimendosi, spinge il successivo, e la perturbazione si propaga come una successione di <em>compressioni</em> (pressione maggiore di quella atmosferica) e <em>rarefazioni</em>. Nel vuoto non c'è nulla da comprimere: il suono non si propaga.</p>
+      <p>Si può descrivere l'onda con lo spostamento delle particelle \(s(x,t)=s_0\sin(kx-\omega t)\) oppure con la sovrappressione \(\Delta p(x,t)=\Delta p_0\cos(kx-\omega t)\). Le due descrizioni sono sfasate di \(\pi/2\): dove lo spostamento è massimo la sovrappressione è nulla, e viceversa. Le compressioni massime si trovano nei punti dove le particelle sono ferme.</p>
+
+      <h3>Velocità del suono</h3>
+      <p>Nei fluidi, con \(B\) modulo di compressibilità adiabatica e \(\rho\) densità:</p>
+      <div class="formula">\[ v=\sqrt{\frac{B}{\rho}}\qquad\text{e nei solidi (sbarra)}\qquad v=\sqrt{\frac{Y}{\rho}} \]</div>
+      <p>Per un gas ideale la relazione diventa particolarmente utile:</p>
+      <div class="formula">\[ v=\sqrt{\frac{\gamma R T}{M}} \]</div>
+      <p>con \(T\) temperatura assoluta e \(M\) massa molare. Ne seguono due conseguenze importanti: la velocità del suono in aria <strong>cresce con la radice della temperatura assoluta</strong> e <strong>non dipende dalla pressione</strong> (aumentando la pressione aumenta anche la densità, e l'effetto si compensa). Un'utile approssimazione lineare fra 0 e 30 °C:</p>
+      <div class="formula">\[ v \approx \big(331{,}5 + 0{,}6\,t_{\!°\mathrm{C}}\big)\ \mathrm{m/s} \]</div>
+      <table>
+        <tr><th>Mezzo</th><th>v (m/s)</th><th>Nota</th></tr>
+        <tr><td>Aria, 0 °C</td><td class="num">331</td><td>gas: bassa rigidità</td></tr>
+        <tr><td>Aria, 20 °C</td><td class="num">343</td><td>valore di riferimento nei problemi</td></tr>
+        <tr><td>Elio, 20 °C</td><td class="num">1005</td><td>M piccola &#8594; v grande</td></tr>
+        <tr><td>Acqua, 20 °C</td><td class="num">1480</td><td>liquido: B molto maggiore</td></tr>
+        <tr><td>Legno</td><td class="num">3300&#8211;4000</td><td>&#8212;</td></tr>
+        <tr><td>Acciaio</td><td class="num">5940</td><td>solido molto rigido</td></tr>
+      </table>
+      <p>La regola generale è <em>solidi &gt; liquidi &gt; gas</em>: passando ai solidi la rigidità cresce molto più di quanto cresca la densità.</p>
+
+      <h3>Intensità e livello sonoro</h3>
+      <p>L'<strong>intensità</strong> è la potenza che attraversa l'unità di superficie perpendicolare alla propagazione. Per una sorgente puntiforme che irradia in modo isotropo potenza \(P\) in un mezzo non assorbente:</p>
+      <div class="formula">\[ I=\frac{P}{4\pi r^{2}}\qquad [\,I\,]=\mathrm{W/m^2} \]</div>
+      <p>L'intensità decresce con l'inverso del quadrato della distanza ed è proporzionale al quadrato dell'ampiezza: \(I\propto \Delta p_0^{2}\). L'orecchio umano copre un intervallo di intensità enorme (dodici ordini di grandezza) e risponde in modo approssimativamente logaritmico: per questo si usa il <strong>livello di intensità sonora</strong></p>
+      <div class="formula">\[ L=10\log_{10}\!\frac{I}{I_0}\ \ \mathrm{dB},\qquad I_0=1{,}0\times10^{-12}\ \mathrm{W/m^2} \]</div>
+      <p>Il decibel non è un'unità di misura assoluta ma il logaritmo di un <em>rapporto</em> rispetto alla soglia convenzionale di udibilità \(I_0\). Due conseguenze da memorizzare:</p>
+      <ul>
+        <li>raddoppiare l'intensità aggiunge \(10\log_{10}2\approx 3{,}0\) dB;</li>
+        <li>moltiplicare l'intensità per 10 aggiunge esattamente 10 dB;</li>
+        <li>raddoppiare la distanza da una sorgente puntiforme divide \(I\) per 4, cioè toglie circa 6 dB.</li>
+      </ul>
+      <table>
+        <tr><th>Sorgente</th><th>L (dB)</th><th>I (W/m&#178;)</th></tr>
+        <tr><td>Soglia di udibilità</td><td class="num">0</td><td class="num">10&#8315;&#185;&#178;</td></tr>
+        <tr><td>Sussurro a 1 m</td><td class="num">30</td><td class="num">10&#8315;&#8313;</td></tr>
+        <tr><td>Conversazione</td><td class="num">60</td><td class="num">10&#8315;&#8310;</td></tr>
+        <tr><td>Traffico intenso</td><td class="num">80</td><td class="num">10&#8315;&#8308;</td></tr>
+        <tr><td>Concerto rock</td><td class="num">110</td><td class="num">10&#8315;&#185;</td></tr>
+        <tr><td>Soglia del dolore</td><td class="num">120</td><td class="num">1</td></tr>
+      </table>
+      <p class="small">Attenzione a non confondere l'intensità (grandezza fisica oggettiva) con il <em>volume percepito</em> (grandezza psicofisica, dipendente anche dalla frequenza) e l'<em>altezza</em> del suono (legata alla frequenza) con il <em>timbro</em> (legato al contenuto armonico).</p>
+
+      <h3>Effetto Doppler</h3>
+      <p>Quando sorgente e osservatore sono in moto relativo rispetto al mezzo, la frequenza percepita \(f'\) differisce da quella emessa \(f\):</p>
+      <div class="formula">\[ f'=f\;\frac{v \pm v_O}{v \mp v_S} \]</div>
+      <p>dove \(v\) è la velocità del suono nel mezzo, \(v_O\) e \(v_S\) le velocità di osservatore e sorgente. La regola dei segni si ricorda senza impararla a memoria: <strong>ogni moto di avvicinamento fa aumentare \(f'\)</strong>, quindi si sceglie il segno che fa crescere la frazione (segno \(+\) al numeratore e \(-\) al denominatore); ogni moto di allontanamento la fa diminuire.</p>
+      <p>I due casi non sono simmetrici, e la ragione è fisica: se si muove la sorgente cambia la <em>lunghezza d'onda</em> emessa (i fronti si addensano davanti e si diradano dietro), se si muove l'osservatore la lunghezza d'onda resta la stessa ma cambia la <em>velocità relativa</em> con cui incontra i fronti.</p>
+      <p>Se \(v_S \ge v\) la formula perde significato: i fronti non riescono più a precedere la sorgente e si accumulano su una superficie conica, il <strong>cono di Mach</strong>, con semiapertura \(\sin\theta=v/v_S\). L'onda d'urto che ne risulta è il boom sonico. Un ultimo avvertimento: queste formule valgono per moti lungo la congiungente sorgente-osservatore; in generale contano le componenti radiali delle velocità.</p>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-suono-sim" hidden>
+    <div class="simwrap">
+      <h2 style="margin-top:0">Effetto Doppler</h2>
+      <p class="small" style="margin-top:-6px">La sorgente (punto pieno) emette un fronte d'onda a ogni periodo. Osserva come i cerchi si addensano davanti e si diradano dietro: è tutta qui la spiegazione del fenomeno. L'ascoltatore fisso è il triangolo a destra.</p>
+      <canvas id="cvDop" aria-label="Simulazione dell'effetto Doppler con fronti d'onda concentrici"></canvas>
+      <div class="controls">
+        <div class="ctl"><label for="dVs">Velocità sorgente <span class="val" id="dVsV">100 m/s</span></label><input type="range" id="dVs" min="0" max="480" step="5" value="100"></div>
+        <div class="ctl"><label for="dF">Frequenza emessa <span class="val" id="dFV">440 Hz</span></label><input type="range" id="dF" min="100" max="900" step="10" value="440"></div>
+      </div>
+      <div class="readouts">
+        <span class="chip">v<sub>suono</sub> = <b>343 m/s</b></span>
+        <span class="chip">Mach = <b id="dMach">0,29</b></span>
+        <span class="chip">f&#8242; percepita = <b id="dFp">&#8212;</b></span>
+        <span class="chip" id="dStateChip">stato: <b id="dState">in avvicinamento</b></span>
+      </div>
+      <div class="btnrow">
+        <button class="btn" id="dPause" type="button">Pausa</button>
+        <button class="btn" id="dReset" type="button">Riporta la sorgente a sinistra</button>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--waveA)"></i> fronti d'onda</span>
+        <span><i class="swatch" style="background:var(--waveB)"></i> sorgente</span>
+        <span><i class="swatch" style="background:var(--accent)"></i> ascoltatore</span>
+      </div>
+      <p class="simnote">Portando la velocità della sorgente oltre 343 m/s (Mach 1) compare il cono di Mach: la sorgente supera i propri fronti d'onda e la formula del Doppler non è più applicabile.</p>
+    </div>
+
+    <div class="simwrap">
+      <h2 style="margin-top:0">Intensità e livello sonoro</h2>
+      <p class="small" style="margin-top:-6px">Sposta i cursori e osserva la legge dell'inverso del quadrato tradotta in decibel.</p>
+      <canvas id="cvDb" class="short" aria-label="Indicatore di intensita e livello sonoro"></canvas>
+      <div class="controls">
+        <div class="ctl"><label for="sP">Potenza sorgente <span class="val" id="sPV">0,100 W</span></label><input type="range" id="sP" min="-4" max="1" step="0.05" value="-1"></div>
+        <div class="ctl"><label for="sR">Distanza <span class="val" id="sRV">2,0 m</span></label><input type="range" id="sR" min="0.3" max="60" step="0.1" value="2"></div>
+      </div>
+      <div class="readouts">
+        <span class="chip">I = <b id="sI">&#8212;</b></span>
+        <span class="chip">L = <b id="sL">&#8212;</b></span>
+        <span class="chip">confronto: <b id="sCmp">&#8212;</b></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-suono-es" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Esercizi</h2>
+      <p class="small">Dove non indicato diversamente, assumi v<sub>suono</sub> = 343 m/s e I<sub>0</sub> = 1,0 &#215; 10&#8315;&#185;&#178; W/m&#178;.</p>
+      <div id="es-suono"></div>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-suono-quiz" hidden>
+    <div class="card" id="quiz-suono"></div>
+  </div>
+</section>
+
+<!-- ======================= SOVRAPPOSIZIONE ======================= -->
+<section class="panel" id="panel-sovr" role="tabpanel" hidden>
+  <div class="subnav" role="tablist" aria-label="Sottoschede sovrapposizione">
+    <button class="subnav-btn" role="tab" data-sub="sovr|teoria" aria-selected="true">Teoria</button>
+    <button class="subnav-btn" role="tab" data-sub="sovr|sim" aria-selected="false">Simulazione</button>
+    <button class="subnav-btn" role="tab" data-sub="sovr|es" aria-selected="false">Esercizi</button>
+    <button class="subnav-btn" role="tab" data-sub="sovr|quiz" aria-selected="false">Quiz</button>
+  </div>
+
+  <div class="subpanel" id="sub-sovr-teoria">
+    <div class="card prose">
+      <h2>Sovrapposizione, interferenza, battimenti</h2>
+      <div class="callout">
+        <span class="lab">Prima di cominciare</span>
+        <p>Questa è la parte che quasi tutti trovano più astratta, e la ragione è precisa: richiede di tenere in mente due grandezze che variano contemporaneamente nel tempo e di immaginarne la somma istante per istante. Non è una difficoltà di calcolo — l'algebra è quella delle formule di prostaferesi — ma di rappresentazione mentale. Usa la simulazione affiancata alla teoria: seguire le due onde colorate separatamente prima di guardare la risultante rende il meccanismo molto più concreto.</p>
+      </div>
+
+      <h3>Il principio di sovrapposizione</h3>
+      <p>Poiché l'equazione delle onde è lineare, se \(y_1(x,t)\) e \(y_2(x,t)\) ne sono soluzioni, lo è anche la loro somma. In termini fisici:</p>
+      <div class="formula">\[ y_{\text{tot}}(x,t)=y_1(x,t)+y_2(x,t) \]</div>
+      <p>Quando due onde si incontrano, lo spostamento risultante di ogni punto è la <em>somma algebrica</em> degli spostamenti che ciascuna onda produrrebbe da sola. E dopo l'incontro ciascuna onda prosegue immutata, come se l'altra non ci fosse: due voci che si incrociano nella stanza non si "sporcano" a vicenda. Il principio vale finché le ampiezze sono piccole (regime lineare); per onde molto intense compaiono effetti non lineari.</p>
+
+      <h3>Interferenza di due sorgenti coerenti</h3>
+      <p>Due sorgenti sono <strong>coerenti</strong> se hanno la stessa frequenza e una differenza di fase costante nel tempo. In un punto \(P\) che dista \(r_1\) e \(r_2\) dalle due sorgenti, la differenza di cammino \(\Delta r=|r_2-r_1|\) si traduce in una differenza di fase</p>
+      <div class="formula">\[ \Delta\varphi=\frac{2\pi}{\lambda}\,\Delta r \;(+\,\Delta\varphi_0) \]</div>
+      <p>e la condizione di interferenza, per sorgenti in fase, è</p>
+      <div class="formula">\[ \Delta r=n\lambda \;\Rightarrow\; \text{costruttiva}\qquad \Delta r=\Big(n+\tfrac{1}{2}\Big)\lambda \;\Rightarrow\; \text{distruttiva} \]</div>
+      <p>con \(n\) intero. Sommando due onde di uguale ampiezza si ottiene</p>
+      <div class="formula">\[ A_R=2A\left|\cos\frac{\Delta\varphi}{2}\right| \qquad\Longrightarrow\qquad I=4I_0\cos^{2}\frac{\Delta\varphi}{2} \]</div>
+      <p>L'ampiezza risultante va quindi da \(0\) (interferenza completamente distruttiva) a \(2A\) (costruttiva). Nel caso costruttivo l'intensità è <em>quattro</em> volte quella di una singola sorgente, non due: l'energia non viene creata, viene ridistribuita nello spazio, sottratta alle zone di minimo e concentrata in quelle di massimo.</p>
+
+      <svg class="diagram" viewBox="0 0 600 230" role="img" aria-label="Schema della differenza di cammino fra due sorgenti coerenti e un punto P">
+        <circle cx="60" cy="70" r="7" fill="var(--waveA)"/>
+        <circle cx="60" cy="170" r="7" fill="var(--waveB)"/>
+        <text x="38" y="62" fill="var(--waveA)">S&#8321;</text>
+        <text x="38" y="192" fill="var(--waveB)">S&#8322;</text>
+        <g fill="none" stroke="var(--waveA)" stroke-width="1" opacity=".45">
+          <circle cx="60" cy="70" r="45"/><circle cx="60" cy="70" r="90"/><circle cx="60" cy="70" r="135"/><circle cx="60" cy="70" r="180"/><circle cx="60" cy="70" r="225"/>
+        </g>
+        <g fill="none" stroke="var(--waveB)" stroke-width="1" opacity=".45">
+          <circle cx="60" cy="170" r="45"/><circle cx="60" cy="170" r="90"/><circle cx="60" cy="170" r="135"/><circle cx="60" cy="170" r="180"/><circle cx="60" cy="170" r="225"/>
+        </g>
+        <line x1="60" y1="70" x2="470" y2="115" stroke="var(--waveA)" stroke-width="2"/>
+        <line x1="60" y1="170" x2="470" y2="115" stroke="var(--waveB)" stroke-width="2"/>
+        <circle cx="470" cy="115" r="5" fill="var(--accent)"/>
+        <text x="482" y="112" fill="var(--accent)">P</text>
+        <text x="250" y="80" fill="var(--waveA)">r&#8321;</text>
+        <text x="250" y="163" fill="var(--waveB)">r&#8322;</text>
+        <text x="300" y="215" class="mut" text-anchor="middle">&#916;r = |r&#8322; &#8722; r&#8321;| determina la fase relativa in P</text>
+      </svg>
+
+      <h3>Battimenti</h3>
+      <p>Se in uno stesso punto arrivano due onde di ampiezza uguale e frequenze <em>vicine</em> \(f_1\) e \(f_2\), la sovrapposizione dà, per le formule di prostaferesi:</p>
+      <div class="formula">\[ y=A\sin(2\pi f_1 t)+A\sin(2\pi f_2 t)=\underbrace{2A\cos\!\Big(2\pi\frac{f_1-f_2}{2}t\Big)}_{\text{ampiezza modulata}}\;\sin\!\Big(2\pi\frac{f_1+f_2}{2}t\Big) \]</div>
+      <p>Si ottiene un'oscillazione alla frequenza <em>media</em> \((f_1+f_2)/2\), la cui ampiezza è modulata lentamente da un fattore che oscilla a \(|f_1-f_2|/2\). L'orecchio però percepisce l'<em>intensità</em>, che dipende dal quadrato dell'ampiezza: il massimo di volume si ripete due volte per ogni periodo del coseno, e quindi la frequenza dei battimenti udibili è</p>
+      <div class="formula">\[ f_{\text{batt}}=|f_1-f_2| \]</div>
+      <p>Due diapason da 440 Hz e 443 Hz danno un suono di 441,5 Hz che pulsa 3 volte al secondo. È esattamente il metodo con cui si accorda uno strumento: si stringe o si allenta la corda finché i battimenti rallentano fino a sparire. Se invece \(|f_1-f_2|\) supera una ventina di hertz l'orecchio smette di distinguere le pulsazioni e percepisce due suoni distinti.</p>
+
+      <div class="callout">
+        <span class="lab">Collegamento con l'esperienza</span>
+        <p>Interferenza e battimenti non sono fenomeni da laboratorio. Sono i punti "morti" che senti spostandoti in una stanza con due casse acustiche accese; è il rombo pulsante di due motori quasi sincroni; è l'increspatura che appare quando due serie di onde circolari si incontrano in una pozzanghera. Ogni volta che ritrovi il fenomeno fuori dall'aula, la formula diventa un po' meno astratta.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-sovr-sim" hidden>
+    <div class="simwrap">
+      <h2 style="margin-top:0">Due onde e la loro somma</h2>
+      <p class="small" style="margin-top:-6px">Nel riquadro superiore le due onde componenti, in blu e in arancio; in quello inferiore la risultante. Segui prima una sola onda per volta, poi guarda come si costruisce la somma punto per punto.</p>
+      <div class="segmented" role="group" aria-label="Modalità di visualizzazione">
+        <button type="button" data-sovr-mode="spazio" aria-pressed="true">Onde nello spazio</button>
+        <button type="button" data-sovr-mode="tempo" aria-pressed="false">Segnale in un punto</button>
+      </div>
+      <canvas id="cvSovr" class="tall" aria-label="Simulazione di sovrapposizione di due onde"></canvas>
+      <div class="controls">
+        <div class="ctl"><label for="sf1">Frequenza onda 1 <span class="val" id="sf1V">2,00 Hz</span></label><input type="range" id="sf1" min="0.5" max="8" step="0.05" value="2"></div>
+        <div class="ctl"><label for="sf2">Frequenza onda 2 <span class="val" id="sf2V">2,00 Hz</span></label><input type="range" id="sf2" min="0.5" max="8" step="0.05" value="2"></div>
+        <div class="ctl"><label for="sa1">Ampiezza onda 1 <span class="val" id="sa1V">1,00</span></label><input type="range" id="sa1" min="0" max="1.5" step="0.05" value="1"></div>
+        <div class="ctl"><label for="sa2">Ampiezza onda 2 <span class="val" id="sa2V">1,00</span></label><input type="range" id="sa2" min="0" max="1.5" step="0.05" value="1"></div>
+        <div class="ctl"><label for="sph">Sfasamento &#916;&#966; <span class="val" id="sphV">0&#176;</span></label><input type="range" id="sph" min="0" max="360" step="1" value="0"></div>
+      </div>
+      <div class="readouts">
+        <span class="chip">&#916;f = <b id="sDf">0,00 Hz</b></span>
+        <span class="chip">f<sub>batt</sub> = <b id="sFb">&#8212;</b></span>
+        <span class="chip">f<sub>media</sub> = <b id="sFm">2,00 Hz</b></span>
+        <span class="chip">A<sub>max</sub> risultante = <b id="sAr">2,00</b></span>
+      </div>
+      <div class="btnrow">
+        <button class="btn" data-preset="costruttiva" type="button">Interferenza costruttiva</button>
+        <button class="btn" data-preset="distruttiva" type="button">Interferenza distruttiva</button>
+        <button class="btn" data-preset="battimenti" type="button">Battimenti</button>
+        <button class="btn" id="sPause" type="button">Pausa</button>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--waveA)"></i> onda 1</span>
+        <span><i class="swatch" style="background:var(--waveB)"></i> onda 2</span>
+        <span><i class="swatch" style="background:var(--accent)"></i> risultante</span>
+        <span><i class="swatch" style="background:var(--muted)"></i> inviluppo (nei battimenti)</span>
+      </div>
+      <p class="simnote">Le frequenze sono nell'ordine di pochi hertz per rendere il fenomeno visibile: la matematica è identica a quella di due diapason da 440 e 443 Hz, semplicemente rallentata di un fattore cento. Nel preset "Battimenti" la linea tratteggiata è l'inviluppo 2A&#183;cos(&#960;&#916;f&#183;t): l'orecchio percepisce un massimo di volume ogni volta che l'inviluppo tocca un estremo, quindi &#916;f volte al secondo.</p>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-sovr-es" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Esercizi</h2>
+      <p class="small">Dove serve, assumi v<sub>suono</sub> = 343 m/s.</p>
+      <div id="es-sovr"></div>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-sovr-quiz" hidden>
+    <div class="card" id="quiz-sovr"></div>
+  </div>
+</section>
+
+<!-- ======================= ONDE STAZIONARIE ======================= -->
+<section class="panel" id="panel-staz" role="tabpanel" hidden>
+  <div class="subnav" role="tablist" aria-label="Sottoschede onde stazionarie">
+    <button class="subnav-btn" role="tab" data-sub="staz|teoria" aria-selected="true">Teoria</button>
+    <button class="subnav-btn" role="tab" data-sub="staz|sim" aria-selected="false">Simulazione</button>
+    <button class="subnav-btn" role="tab" data-sub="staz|es" aria-selected="false">Esercizi</button>
+    <button class="subnav-btn" role="tab" data-sub="staz|quiz" aria-selected="false">Quiz</button>
+  </div>
+
+  <div class="subpanel" id="sub-staz-teoria">
+    <div class="card prose">
+      <h2>Onde stazionarie</h2>
+      <p>Un'onda stazionaria nasce dalla sovrapposizione di due onde identiche che viaggiano in versi opposti — tipicamente un'onda e la sua riflessa. Il risultato non trasporta energia lungo il mezzo: il profilo non avanza, oscilla sul posto.</p>
+
+      <h3>Riflessione agli estremi</h3>
+      <ul>
+        <li><strong>Estremo fisso</strong>: l'onda riflessa è invertita, subisce uno sfasamento di \(\pi\). Lì lo spostamento deve essere sempre nullo: si forma un <em>nodo</em>.</li>
+        <li><strong>Estremo libero</strong>: l'onda riflessa non è invertita. Lì lo spostamento è massimo: si forma un <em>ventre</em>.</li>
+      </ul>
+
+      <h3>La forma matematica</h3>
+      <p>Sommando \(y_1=A\sin(kx-\omega t)\) e \(y_2=A\sin(kx+\omega t)\):</p>
+      <div class="formula">\[ y(x,t)=2A\,\sin(kx)\,\cos(\omega t) \]</div>
+      <p>La struttura è essenziale: la dipendenza da \(x\) e quella da \(t\) sono <em>fattorizzate</em>. Il fattore \(2A\sin(kx)\) è l'ampiezza propria di ciascun punto, fissa nel tempo; il fattore \(\cos(\omega t)\) fa oscillare tutti i punti in fase fra loro. In un'onda progressiva, invece, la fase \(kx-\omega t\) lega inscindibilmente spazio e tempo, e i punti oscillano sfasati fra loro.</p>
+      <ul>
+        <li><strong>Nodi</strong>: punti sempre fermi, dove \(\sin(kx)=0\), cioè \(x=n\lambda/2\).</li>
+        <li><strong>Ventri</strong>: punti di ampiezza massima \(2A\), dove \(|\sin(kx)|=1\), cioè \(x=(2n+1)\lambda/4\).</li>
+        <li>Due nodi consecutivi (o due ventri consecutivi) distano \(\lambda/2\); un nodo e il ventre adiacente distano \(\lambda/4\).</li>
+      </ul>
+
+      <h3>Corda con entrambi gli estremi fissi</h3>
+      <p>Le condizioni al contorno (nodo a \(x=0\) e a \(x=L\)) selezionano solo certe lunghezze d'onda: nella corda deve entrare un numero intero di mezze lunghezze d'onda.</p>
+      <div class="formula">\[ L=n\frac{\lambda_n}{2}\;\Rightarrow\;\lambda_n=\frac{2L}{n},\qquad f_n=\frac{n\,v}{2L}=\frac{n}{2L}\sqrt{\frac{F}{\mu}},\quad n=1,2,3,\dots \]</div>
+      <p>\(f_1\) è la <strong>frequenza fondamentale</strong> (prima armonica); le altre sono le armoniche superiori, tutte multiple intere di \(f_1\). È la ragione fisica per cui una corda di chitarra, accorciata a metà dal tasto, suona un'ottava sopra.</p>
+
+      <svg class="diagram" viewBox="0 0 600 260" role="img" aria-label="Primi tre modi normali di una corda con estremi fissi">
+        <g stroke="var(--line)" stroke-width="1">
+          <line x1="60" y1="45" x2="540" y2="45"/><line x1="60" y1="135" x2="540" y2="135"/><line x1="60" y1="225" x2="540" y2="225"/>
+        </g>
+        <polyline data-sine data-cycles="0.5" data-amp="30" data-w="480" data-x0="60" data-y0="45" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+        <polyline data-sine data-cycles="0.5" data-amp="-30" data-w="480" data-x0="60" data-y0="45" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        <polyline data-sine data-cycles="1" data-amp="30" data-w="480" data-x0="60" data-y0="135" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+        <polyline data-sine data-cycles="1" data-amp="-30" data-w="480" data-x0="60" data-y0="135" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        <polyline data-sine data-cycles="1.5" data-amp="30" data-w="480" data-x0="60" data-y0="225" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+        <polyline data-sine data-cycles="1.5" data-amp="-30" data-w="480" data-x0="60" data-y0="225" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        <g fill="var(--waveB)">
+          <circle cx="60" cy="45" r="4"/><circle cx="540" cy="45" r="4"/>
+          <circle cx="60" cy="135" r="4"/><circle cx="300" cy="135" r="4"/><circle cx="540" cy="135" r="4"/>
+          <circle cx="60" cy="225" r="4"/><circle cx="220" cy="225" r="4"/><circle cx="380" cy="225" r="4"/><circle cx="540" cy="225" r="4"/>
+        </g>
+        <text x="0" y="49" class="mut">n=1</text><text x="0" y="139" class="mut">n=2</text><text x="0" y="229" class="mut">n=3</text>
+        <text x="556" y="49" class="mut">&#955;=2L</text><text x="556" y="139" class="mut">&#955;=L</text><text x="556" y="229" class="mut">&#955;=2L/3</text>
+      </svg>
+
+      <h3>Corda o tubo con un solo estremo fisso</h3>
+      <p>Con un estremo fisso (nodo) e uno libero (ventre) nella lunghezza deve entrare un numero <em>dispari</em> di quarti di lunghezza d'onda:</p>
+      <div class="formula">\[ L=(2n-1)\frac{\lambda_n}{4}\;\Rightarrow\;\lambda_n=\frac{4L}{2n-1},\qquad f_n=\frac{(2n-1)\,v}{4L} \]</div>
+      <p>Compaiono quindi solo le armoniche <strong>dispari</strong>: \(f_1,\,3f_1,\,5f_1,\dots\)</p>
+
+      <h3>Tubi sonori</h3>
+      <p>Nei tubi vale lo stesso schema, ma occorre chiarire una cosa che genera molta confusione: le condizioni al contorno si scrivono in termini di <em>spostamento</em> delle particelle d'aria.</p>
+      <ul>
+        <li><strong>Estremo aperto</strong>: l'aria è libera di muoversi &#8594; <em>ventre</em> di spostamento (e nodo di pressione, perché lì la pressione resta quella atmosferica).</li>
+        <li><strong>Estremo chiuso</strong>: l'aria non può muoversi &#8594; <em>nodo</em> di spostamento (e ventre di pressione).</li>
+      </ul>
+      <div class="formula">\[ \text{tubo aperto-aperto: } f_n=\frac{n\,v}{2L}\quad\text{(tutte le armoniche)}\qquad \text{tubo chiuso-aperto: } f_n=\frac{(2n-1)\,v}{4L}\quad\text{(solo dispari)} \]</div>
+      <p>A parità di lunghezza, <strong>un tubo chiuso suona un'ottava sotto</strong> uno aperto (\(v/4L\) contro \(v/2L\)) e ha uno spettro privo delle armoniche pari: è la ragione per cui un clarinetto (tubo chiuso a un'estremità dall'ancia) e un flauto (tubo aperto) di lunghezza simile hanno registro e timbro così diversi.</p>
+      <p class="small">Nella pratica il ventre non cade esattamente sul bordo, ma poco oltre: si introduce la <em>correzione di estremità</em> \(\Delta L\approx 0{,}6\,r\), con \(r\) raggio del tubo. Nei problemi scolastici si trascura, salvo indicazione contraria.</p>
+
+      <h3>Risonanza e timbro</h3>
+      <p>Se si sollecita il sistema a una frequenza qualsiasi non si osserva alcuna onda stazionaria apprezzabile: solo in corrispondenza delle frequenze proprie \(f_n\) le riflessioni successive si sommano in fase e l'ampiezza cresce. È la <strong>risonanza</strong>, e la simulazione della prossima scheda la mostra in modo diretto. Uno strumento reale eccita simultaneamente più armoniche: le loro ampiezze relative — l'analisi che Helmholtz introdusse per primo — costituiscono il <em>timbro</em>, ciò che distingue due strumenti che suonano la stessa nota.</p>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-staz-sim" hidden>
+    <div class="simwrap">
+      <h2 style="margin-top:0">Modi normali di corde e tubi</h2>
+      <p class="small" style="margin-top:-6px">Muovi lentamente il cursore della frequenza: l'ampiezza resta quasi nulla finché non incontri una frequenza propria, dove il sistema entra in risonanza. È così che funziona davvero uno strumento musicale.</p>
+      <div class="segmented" role="group" aria-label="Sistema risonante">
+        <button type="button" data-staz-mode="corda-ff" aria-pressed="true">Corda: estremi fissi</button>
+        <button type="button" data-staz-mode="corda-fl" aria-pressed="false">Corda: fisso-libero</button>
+        <button type="button" data-staz-mode="tubo-aa" aria-pressed="false">Tubo aperto-aperto</button>
+        <button type="button" data-staz-mode="tubo-ca" aria-pressed="false">Tubo chiuso-aperto</button>
+      </div>
+      <canvas id="cvStaz" aria-label="Simulazione dei modi normali di una corda o di un tubo sonoro"></canvas>
+      <div class="controls">
+        <div class="ctl"><label for="zF">Frequenza di eccitazione <span class="val" id="zFV">100 Hz</span></label><input type="range" id="zF" min="10" max="1200" step="1" value="100"></div>
+        <div class="ctl"><label for="zL">Lunghezza L <span class="val" id="zLV">1,00 m</span></label><input type="range" id="zL" min="0.3" max="2.5" step="0.01" value="1"></div>
+        <div class="ctl"><label for="zV">Velocità dell'onda <span class="val" id="zVV">343 m/s</span></label><input type="range" id="zV" min="60" max="600" step="1" value="343"></div>
+      </div>
+      <div class="readouts">
+        <span class="chip">f&#8321; = <b id="zF1">&#8212;</b></span>
+        <span class="chip">armonica più vicina: <b id="zN">&#8212;</b></span>
+        <span class="chip">&#955; del modo = <b id="zLam">&#8212;</b></span>
+        <span class="chip">risposta: <b id="zRes">&#8212;</b></span>
+      </div>
+      <div class="btnrow">
+        <span class="small" style="margin-right:2px">Vai al modo proprio:</span>
+        <button class="btn" data-harm="1" type="button">1</button>
+        <button class="btn" data-harm="2" type="button">2</button>
+        <button class="btn" data-harm="3" type="button">3</button>
+        <button class="btn" data-harm="4" type="button">4</button>
+        <button class="btn" data-harm="5" type="button">5</button>
+        <button class="btn" id="zPause" type="button">Pausa</button>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--accent)"></i> spostamento istantaneo</span>
+        <span><i class="swatch" style="background:var(--waveA)"></i> inviluppo</span>
+        <span><i class="swatch" style="background:var(--waveB)"></i> nodi</span>
+      </div>
+      <p class="simnote">Nei modi "tubo" la curva rappresenta lo <em>spostamento</em> longitudinale dell'aria, non un movimento trasversale: un ventre indica aria che oscilla avanti e indietro con grande ampiezza, un nodo aria ferma. Nota che nei tubi chiusi le armoniche pari sono semplicemente assenti.</p>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-staz-es" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Esercizi</h2>
+      <p class="small">Dove non indicato diversamente, assumi v<sub>suono</sub> = 343 m/s e trascura la correzione di estremità.</p>
+      <div id="es-staz"></div>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-staz-quiz" hidden>
+    <div class="card" id="quiz-staz"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <p>Onde e fenomeni ondulatori &#183; percorso interattivo per il liceo scientifico. Le simulazioni usano valori numerici semplificati per rendere visibili i fenomeni: le relazioni fisiche rappresentate sono però quelle esatte.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   UTILITÀ GENERALI
+   ============================================================ */
+var root=document.documentElement;
+function $(s,c){return (c||document).querySelector(s);}
+function $$(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));}
+function fmt(x,d){
+  if(!isFinite(x)) return "—";
+  return x.toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d});
+}
+function fmtSci(x){
+  if(x===0) return "0";
+  var e=Math.floor(Math.log10(Math.abs(x)));
+  var m=x/Math.pow(10,e);
+  return fmt(m,2)+"·10"+sup(e);
+}
+function sup(n){
+  var m={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴",
+         "5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+  return String(n).split("").map(function(c){return m[c]||c;}).join("");
+}
+var CSSCACHE={},cssStamp=0;
+function cssv(n){
+  if(!CSSCACHE[n]) CSSCACHE[n]=getComputedStyle(root).getPropertyValue(n).trim();
+  return CSSCACHE[n];
+}
+function clearCss(){CSSCACHE={};}
+
+/* ============================================================
+   TEMA GIORNO / NOTTE
+   ============================================================ */
+var themeBtn=$('#themeBtn'), themeLabel=$('#themeLabel');
+function applyTheme(t){
+  root.setAttribute('data-theme',t);
+  themeLabel.textContent = (t==='dark')?'Notte':'Giorno';
+  themeBtn.setAttribute('aria-pressed', t==='dark'?'true':'false');
+  try{localStorage.setItem('onde-theme',t);}catch(e){}
+  setTimeout(clearCss,10);
+  setTimeout(clearCss,520);
+}
+var saved=null;
+try{saved=localStorage.getItem('onde-theme');}catch(e){}
+if(!saved) saved=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+applyTheme(saved);
+themeBtn.addEventListener('click',function(){
+  applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+});
+
+/* ============================================================
+   DIAGRAMMI SVG STATICI (sinusoidi generate)
+   ============================================================ */
+$$('[data-sine]').forEach(function(el){
+  var cyc=parseFloat(el.getAttribute('data-cycles')),
+      amp=parseFloat(el.getAttribute('data-amp')),
+      w=parseFloat(el.getAttribute('data-w')),
+      x0=parseFloat(el.getAttribute('data-x0')),
+      y0=parseFloat(el.getAttribute('data-y0')),
+      ph=parseFloat(el.getAttribute('data-phase')||'0');
+  var N=180,pts=[];
+  for(var i=0;i<=N;i++){
+    var u=i/N;
+    pts.push((x0+w*u).toFixed(2)+","+(y0-amp*Math.sin(2*Math.PI*cyc*u+ph)).toFixed(2));
+  }
+  el.setAttribute('points',pts.join(' '));
+});
+
+/* ============================================================
+   CANVAS: SETUP E CICLO DI ANIMAZIONE
+   ============================================================ */
+function setup(cv){
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  var w=cv.clientWidth,h=cv.clientHeight;
+  if(!w||!h) return null;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){
+    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+  }
+  var ctx=cv.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+  return {ctx:ctx,w:w,h:h};
+}
+function axis(ctx,x1,y,x2){
+  ctx.strokeStyle=cssv('--line'); ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(x1,y+.5); ctx.lineTo(x2,y+.5); ctx.stroke();
+}
+function label(ctx,txt,x,y,color,align,size){
+  ctx.fillStyle=color||cssv('--muted');
+  ctx.font=(size||11)+'px -apple-system,Segoe UI,Roboto,sans-serif';
+  ctx.textAlign=align||'left'; ctx.textBaseline='alphabetic';
+  ctx.fillText(txt,x,y);
+}
+function poly(ctx,pts,color,width,dash){
+  ctx.save();
+  ctx.strokeStyle=color; ctx.lineWidth=width||2; ctx.lineJoin='round'; ctx.lineCap='round';
+  if(dash) ctx.setLineDash(dash);
+  ctx.beginPath();
+  for(var i=0;i<pts.length;i+=2){
+    if(i===0) ctx.moveTo(pts[0],pts[1]); else ctx.lineTo(pts[i],pts[i+1]);
+  }
+  ctx.stroke(); ctx.restore();
+}
+
+var SIMS={}, activeSim=null, prevTs=null;
+function tick(ts){
+  if(prevTs===null) prevTs=ts;
+  var dt=Math.min(0.05,(ts-prevTs)/1000); prevTs=ts;
+  if(activeSim){
+    if(!activeSim.paused) activeSim.t+=dt;
+    try{activeSim.draw();}catch(e){}
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+window.addEventListener('resize',function(){ if(activeSim) try{activeSim.draw();}catch(e){} });
+
+function pauseBtn(btn,sim){
+  btn.addEventListener('click',function(){
+    sim.paused=!sim.paused;
+    btn.textContent=sim.paused?'Riprendi':'Pausa';
+  });
+}
+
+/* ============================================================
+   SIM 1 — ONDE MECCANICHE
+   ============================================================ */
+(function(){
+  var cv=$('#cvMecc'); if(!cv) return;
+  var st={t:0,paused:false,mode:'trasv',A:1,f:1,v:2,trace:false,hist:[]};
+  var WIN=6; // metri visualizzati
+
+  function refresh(){
+    var lam=st.v/st.f, T=1/st.f;
+    $('#mAmpV').textContent=fmt(st.A,2)+' cm';
+    $('#mFreqV').textContent=fmt(st.f,2)+' Hz';
+    $('#mVelV').textContent=fmt(st.v,2)+' m/s';
+    $('#mLam').textContent=fmt(lam,2)+' m';
+    $('#mPer').textContent=fmt(T,2)+' s';
+    $('#mK').textContent=fmt(2*Math.PI/lam,2)+' rad/m';
+    $('#mOm').textContent=fmt(2*Math.PI*st.f,2)+' rad/s';
+    $('#mEn').textContent=fmt(Math.pow(st.A*st.f,2),2);
+  }
+  ['mAmp','mFreq','mVel'].forEach(function(id){
+    var el=$('#'+id);
+    el.addEventListener('input',function(){
+      var v=parseFloat(el.value);
+      if(id==='mAmp') st.A=v; else if(id==='mFreq') st.f=v; else st.v=v;
+      refresh();
+    });
+  });
+  $$('[data-mecc-mode]').forEach(function(b){
+    b.addEventListener('click',function(){
+      st.mode=b.getAttribute('data-mecc-mode');
+      $$('[data-mecc-mode]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
+    });
+  });
+  var trBtn=$('#mTrace');
+  trBtn.addEventListener('click',function(){
+    st.trace=!st.trace; st.hist=[];
+    trBtn.setAttribute('aria-pressed',st.trace?'true':'false');
+    trBtn.textContent=st.trace?'Nascondi oscillazione nel tempo':'Mostra oscillazione nel tempo';
+  });
+  pauseBtn($('#mPause'),st);
+
+  var XMARK=1.5; // posizione (m) della particella evidenziata
+
+  st.draw=function(){
+    var s=setup(cv); if(!s) return;
+    var ctx=s.ctx,w=s.w,h=s.h;
+    var pad=14, plotH=st.trace?h*0.60:h;
+    var mid=plotH/2;
+    var pxPerM=(w-2*pad)/WIN;
+    var k=2*Math.PI*st.f/st.v, om=2*Math.PI*st.f;
+    var scaleA=Math.min(plotH*0.34/2.5, 42); // px per cm
+    var amp=st.A*scaleA;
+    var col=cssv('--accent'), colB=cssv('--waveB'), colA=cssv('--waveA');
+
+    // griglia orizzontale
+    ctx.strokeStyle=cssv('--grid'); ctx.lineWidth=1;
+    for(var g=0;g<=WIN;g++){
+      var gx=pad+g*pxPerM;
+      ctx.beginPath(); ctx.moveTo(gx+.5,10); ctx.lineTo(gx+.5,plotH-16); ctx.stroke();
+    }
+    axis(ctx,pad,mid,w-pad);
+
+    if(st.mode==='trasv'){
+      var pts=[];
+      for(var px=0;px<=w-2*pad;px++){
+        var x=px/pxPerM;
+        pts.push(pad+px, mid-amp*Math.sin(k*x-om*st.t));
+      }
+      poly(ctx,pts,col,2.6);
+      // particelle del mezzo
+      for(var i=0;i<=WIN*4;i++){
+        var xm=i/4, sx=pad+xm*pxPerM;
+        var sy=mid-amp*Math.sin(k*xm-om*st.t);
+        ctx.fillStyle=cssv('--muted'); ctx.globalAlpha=.55;
+        ctx.beginPath(); ctx.arc(sx,sy,2.2,0,6.2832); ctx.fill(); ctx.globalAlpha=1;
+      }
+      var my=mid-amp*Math.sin(k*XMARK-om*st.t), mx=pad+XMARK*pxPerM;
+      ctx.strokeStyle=colB; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(mx,mid-amp-8); ctx.lineTo(mx,mid+amp+8); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle=colB; ctx.beginPath(); ctx.arc(mx,my,5,0,6.2832); ctx.fill();
+      // indicatore di lunghezza d'onda
+      var lam=st.v/st.f, lamPx=lam*pxPerM;
+      if(lamPx<w-2*pad-20){
+        var y0=14;
+        ctx.strokeStyle=colA; ctx.lineWidth=1.4;
+        ctx.beginPath(); ctx.moveTo(pad,y0); ctx.lineTo(pad+lamPx,y0); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(pad,y0-4); ctx.lineTo(pad,y0+4);
+        ctx.moveTo(pad+lamPx,y0-4); ctx.lineTo(pad+lamPx,y0+4); ctx.stroke();
+        label(ctx,'λ = '+fmt(lam,2)+' m',pad+lamPx+7,y0+4,colA);
+      }
+      label(ctx,'direzione di propagazione →',w-pad,plotH-4,cssv('--muted'),'right');
+      label(ctx,'oscillazione ↕ perpendicolare',pad,plotH-4,cssv('--muted'));
+    } else {
+      // longitudinale: reticolo di particelle spostate lungo x
+      var rows=7, top=mid-plotH*0.22, gap=plotH*0.44/(rows-1);
+      var nx=Math.floor(WIN*11);
+      for(var j=0;j<nx;j++){
+        var x0=j/11;
+        var disp=st.A*0.055*Math.sin(k*x0-om*st.t); // in metri
+        var xx=pad+(x0+disp)*pxPerM;
+        for(var r=0;r<rows;r++){
+          var yy=top+r*gap;
+          ctx.fillStyle=col; ctx.globalAlpha=.75;
+          ctx.beginPath(); ctx.arc(xx,yy,2.4,0,6.2832); ctx.fill();
+        }
+      }
+      ctx.globalAlpha=1;
+      // grafico dello spostamento
+      var by=plotH-34, bamp=Math.min(24,plotH*0.10);
+      axis(ctx,pad,by,w-pad);
+      var p2=[];
+      for(var px2=0;px2<=w-2*pad;px2++){
+        var x2=px2/pxPerM;
+        p2.push(pad+px2, by-bamp*Math.sin(k*x2-om*st.t)/2.5*st.A);
+      }
+      poly(ctx,p2,colA,1.8);
+      label(ctx,'spostamento s(x) — positivo = verso destra',pad,by+26,cssv('--muted'));
+      var xc=(Math.PI/2)/k; // prima compressione
+      label(ctx,'compressioni e rarefazioni',w-pad,20,cssv('--muted'),'right');
+    }
+
+    // pannello temporale
+    if(st.trace){
+      var ty=plotH+ (h-plotH)/2;
+      ctx.strokeStyle=cssv('--line'); ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(pad,plotH+2.5); ctx.lineTo(w-pad,plotH+2.5); ctx.stroke();
+      var WT=3; // secondi
+      if(!st.paused){
+        st.hist.push([st.t, Math.sin(k*XMARK-om*st.t)*st.A]);
+        while(st.hist.length&&st.hist[0][0]<st.t-WT) st.hist.shift();
+      }
+      axis(ctx,pad,ty,w-pad);
+      var tamp=Math.min((h-plotH)*0.32, 34);
+      var tp=[];
+      for(var q=0;q<st.hist.length;q++){
+        var u=(st.hist[q][0]-(st.t-WT))/WT;
+        tp.push(pad+u*(w-2*pad), ty-tamp*st.hist[q][1]/2.5);
+      }
+      if(tp.length>=4) poly(ctx,tp,colB,2.2);
+      label(ctx,'spostamento del punto arancione in funzione del tempo (ultimi 3 s)',pad,plotH+18,cssv('--muted'));
+      var T=1/st.f;
+      if(T<WT){
+        var yb=h-8;
+        ctx.strokeStyle=colB; ctx.lineWidth=1.2;
+        var x1=pad+(w-2*pad)*(1-T/WT), x2b=w-pad;
+        ctx.beginPath(); ctx.moveTo(x1,yb); ctx.lineTo(x2b,yb);
+        ctx.moveTo(x1,yb-4); ctx.lineTo(x1,yb+3); ctx.moveTo(x2b,yb-4); ctx.lineTo(x2b,yb+3); ctx.stroke();
+        label(ctx,'T = '+fmt(T,2)+' s',x1-6,yb+4,colB,'right');
+      }
+    }
+  };
+  refresh();
+  SIMS['mecc|sim']=st;
+})();
+
+/* ============================================================
+   SIM 2 — DOPPLER + LIVELLO SONORO
+   ============================================================ */
+(function(){
+  var cv=$('#cvDop'), cvDb=$('#cvDb'); if(!cv) return;
+  var VS_SOUND=343;
+  var st={t:0,paused:false,vs:100,f:440,fronts:[],sx:0,lastEmit:0,P:0.1,r:2};
+  var EMIT_PERIOD=0.40; // s (rallentato per visibilità)
+
+  function refreshDop(){
+    $('#dVsV').textContent=fmt(st.vs,0)+' m/s';
+    $('#dFV').textContent=fmt(st.f,0)+' Hz';
+    $('#dMach').textContent=fmt(st.vs/VS_SOUND,2);
+  }
+  $('#dVs').addEventListener('input',function(){st.vs=parseFloat(this.value);refreshDop();});
+  $('#dF').addEventListener('input',function(){st.f=parseFloat(this.value);refreshDop();});
+  pauseBtn($('#dPause'),st);
+  $('#dReset').addEventListener('click',function(){st.sx=0;st.fronts=[];st.t=0;st.lastT=undefined;st.lastEmit=0;});
+
+  function refreshDb(){
+    var I=st.P/(4*Math.PI*st.r*st.r);
+    var L=10*Math.log10(I/1e-12);
+    $('#sPV').textContent=fmt(st.P,st.P<0.01?4:3)+' W';
+    $('#sRV').textContent=fmt(st.r,1)+' m';
+    $('#sI').textContent=fmtSci(I)+' W/m²';
+    $('#sL').textContent=fmt(L,1)+' dB';
+    var cmp;
+    if(L<0) cmp='sotto la soglia di udibilità';
+    else if(L<25) cmp='appena percepibile';
+    else if(L<45) cmp='come un sussurro';
+    else if(L<70) cmp='come una conversazione';
+    else if(L<90) cmp='come traffico intenso';
+    else if(L<115) cmp='come un concerto: dannoso se prolungato';
+    else cmp='oltre la soglia del dolore';
+    $('#sCmp').textContent=cmp;
+    return L;
+  }
+  $('#sP').addEventListener('input',function(){st.P=Math.pow(10,parseFloat(this.value));refreshDb();});
+  $('#sR').addEventListener('input',function(){st.r=parseFloat(this.value);refreshDb();});
+
+  function drawDb(){
+    var s=setup(cvDb); if(!s) return;
+    var ctx=s.ctx,w=s.w,h=s.h;
+    var L=refreshDb();
+    var pad=18, bw=w-2*pad, by=h*0.60, bh=16;
+    var MIN=0,MAX=130;
+    ctx.fillStyle=cssv('--surface'); ctx.strokeStyle=cssv('--line'); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.rect(pad,by,bw,bh); ctx.fill(); ctx.stroke();
+    var frac=Math.max(0,Math.min(1,(L-MIN)/(MAX-MIN)));
+    var grad=ctx.createLinearGradient(pad,0,pad+bw,0);
+    grad.addColorStop(0,cssv('--accent')); grad.addColorStop(1,cssv('--waveB'));
+    ctx.fillStyle=grad; ctx.fillRect(pad+1,by+1,Math.max(0,frac*bw-2),bh-2);
+    var refs=[[0,'soglia'],[30,'sussurro'],[60,'conversaz.'],[80,'traffico'],[110,'concerto'],[120,'dolore']];
+    refs.forEach(function(rf){
+      var x=pad+bw*(rf[0]-MIN)/(MAX-MIN);
+      ctx.strokeStyle=cssv('--line'); ctx.beginPath();
+      ctx.moveTo(x+.5,by+bh); ctx.lineTo(x+.5,by+bh+6); ctx.stroke();
+      label(ctx,String(rf[0]),x,by+bh+19,cssv('--muted'),'center',10);
+      label(ctx,rf[1],x,by+bh+31,cssv('--muted'),'center',9.5);
+    });
+    var mx=pad+bw*frac;
+    ctx.strokeStyle=cssv('--ink'); ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(mx,by-8); ctx.lineTo(mx,by+bh+2); ctx.stroke();
+    label(ctx,fmt(L,1)+' dB',Math.min(w-pad,Math.max(pad+26,mx)),by-14,cssv('--ink'),'center',13);
+    label(ctx,'livello di intensità sonora L = 10·log₁₀(I/I₀)',pad,20,cssv('--muted'),'left',11);
+  }
+
+  st.draw=function(){
+    var s=setup(cv); if(!s) return;
+    var ctx=s.ctx,w=s.w,h=s.h;
+    var scale=(w*0.20)/VS_SOUND; // px per (m/s) -> velocità in px/s
+    var vSoundPx=VS_SOUND*scale, vsPx=st.vs*scale;
+    var lineY=h*0.40;
+    var obs={x:w-38,y:h*0.80};
+
+    var dtF=(st.lastT===undefined)?0:Math.max(0,Math.min(0.05,st.t-st.lastT));
+    st.lastT=st.t;
+    if(!st.paused){
+      st.sx+=vsPx*dtF;
+      if(st.sx>w+60){ st.sx=-40; st.fronts=[]; }
+      if(st.t-st.lastEmit>=EMIT_PERIOD){
+        st.lastEmit=st.t;
+        st.fronts.push({x:st.sx,y:lineY,t0:st.t});
+      }
+      var diag=Math.sqrt(w*w+h*h);
+      st.fronts=st.fronts.filter(function(fr){return (st.t-fr.t0)*vSoundPx<diag*1.1;});
+    }
+
+    // asse di moto
+    ctx.strokeStyle=cssv('--grid'); ctx.lineWidth=1; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(0,lineY+.5); ctx.lineTo(w,lineY+.5); ctx.stroke(); ctx.setLineDash([]);
+
+    // fronti d'onda
+    ctx.save(); ctx.beginPath(); ctx.rect(0,0,w,h); ctx.clip();
+    st.fronts.forEach(function(fr){
+      var R=(st.t-fr.t0)*vSoundPx;
+      if(R<=0) return;
+      var age=Math.min(1,R/(w*0.9));
+      ctx.strokeStyle=cssv('--waveA');
+      ctx.globalAlpha=Math.max(.12,0.75-0.62*age);
+      ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.arc(fr.x,fr.y,R,0,6.2832); ctx.stroke();
+    });
+    ctx.globalAlpha=1; ctx.restore();
+
+    // cono di Mach
+    if(st.vs>VS_SOUND){
+      var th=Math.asin(VS_SOUND/st.vs);
+      var Lc=w*1.2;
+      ctx.strokeStyle=cssv('--waveB'); ctx.lineWidth=1.6; ctx.globalAlpha=.9;
+      ctx.beginPath();
+      ctx.moveTo(st.sx,lineY); ctx.lineTo(st.sx-Lc*Math.cos(th),lineY-Lc*Math.sin(th));
+      ctx.moveTo(st.sx,lineY); ctx.lineTo(st.sx-Lc*Math.cos(th),lineY+Lc*Math.sin(th));
+      ctx.stroke(); ctx.globalAlpha=1;
+      label(ctx,'cono di Mach: sinθ = v/vₛ = '+fmt(VS_SOUND/st.vs,2),12,h-12,cssv('--waveB'),'left',12);
+    }
+
+    // sorgente
+    ctx.fillStyle=cssv('--waveB');
+    ctx.beginPath(); ctx.arc(st.sx,lineY,7,0,6.2832); ctx.fill();
+    label(ctx,'sorgente',st.sx,lineY-14,cssv('--waveB'),'center',11);
+
+    // osservatore
+    ctx.fillStyle=cssv('--accent');
+    ctx.beginPath(); ctx.moveTo(obs.x,obs.y-9); ctx.lineTo(obs.x+8,obs.y+7); ctx.lineTo(obs.x-8,obs.y+7); ctx.closePath(); ctx.fill();
+    label(ctx,'ascoltatore',obs.x,obs.y+22,cssv('--accent'),'center',11);
+
+    // frequenza percepita
+    var dx=obs.x-st.sx, dy=obs.y-lineY, d=Math.sqrt(dx*dx+dy*dy)||1;
+    var vRad=st.vs*(dx/d); // componente della velocità della sorgente verso l'ascoltatore
+    var out,state;
+    if(st.vs>=VS_SOUND){ out='— (regime supersonico)'; state='onda d\'urto'; }
+    else{
+      var fp=st.f*VS_SOUND/(VS_SOUND-vRad);
+      out=fmt(fp,1)+' Hz';
+      state = vRad>2 ? 'in avvicinamento: f′ > f' : (vRad<-2 ? 'in allontanamento: f′ < f' : 'moto trasversale: f′ ≈ f');
+    }
+    $('#dFp').textContent=out;
+    $('#dState').textContent=state;
+
+    drawDb();
+  };
+  refreshDop(); refreshDb();
+  SIMS['suono|sim']=st;
+})();
+
+/* ============================================================
+   SIM 3 — SOVRAPPOSIZIONE, INTERFERENZA, BATTIMENTI
+   ============================================================ */
+(function(){
+  var cv=$('#cvSovr'); if(!cv) return;
+  var st={t:0,paused:false,mode:'spazio',f1:2,f2:2,a1:1,a2:1,ph:0};
+  var VW=4; // m/s (solo per la modalità spaziale)
+  var XWIN=4, TWIN=3;
+
+  function refresh(){
+    $('#sf1V').textContent=fmt(st.f1,2)+' Hz';
+    $('#sf2V').textContent=fmt(st.f2,2)+' Hz';
+    $('#sa1V').textContent=fmt(st.a1,2);
+    $('#sa2V').textContent=fmt(st.a2,2);
+    $('#sphV').textContent=fmt(st.ph,0)+'°';
+    var df=Math.abs(st.f1-st.f2);
+    $('#sDf').textContent=fmt(df,2)+' Hz';
+    $('#sFb').textContent = df>0.001 ? fmt(df,2)+' Hz  (T = '+fmt(1/df,2)+' s)' : 'nessun battimento';
+    $('#sFm').textContent=fmt((st.f1+st.f2)/2,2)+' Hz';
+    var ar;
+    if(df<0.001){
+      var dp=st.ph*Math.PI/180;
+      ar=Math.sqrt(st.a1*st.a1+st.a2*st.a2+2*st.a1*st.a2*Math.cos(dp));
+    } else ar=st.a1+st.a2;
+    $('#sAr').textContent=fmt(ar,2);
+  }
+  var map={sf1:'f1',sf2:'f2',sa1:'a1',sa2:'a2',sph:'ph'};
+  Object.keys(map).forEach(function(id){
+    $('#'+id).addEventListener('input',function(){ st[map[id]]=parseFloat(this.value); refresh(); });
+  });
+  function setMode(m){
+    st.mode=m;
+    $$('[data-sovr-mode]').forEach(function(o){o.setAttribute('aria-pressed',o.getAttribute('data-sovr-mode')===m?'true':'false');});
+  }
+  $$('[data-sovr-mode]').forEach(function(b){
+    b.addEventListener('click',function(){setMode(b.getAttribute('data-sovr-mode'));});
+  });
+  $$('[data-preset]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var p=b.getAttribute('data-preset');
+      if(p==='costruttiva'){ st.f1=2;st.f2=2;st.a1=1;st.a2=1;st.ph=0; setMode('spazio'); }
+      if(p==='distruttiva'){ st.f1=2;st.f2=2;st.a1=1;st.a2=1;st.ph=180; setMode('spazio'); }
+      if(p==='battimenti'){ st.f1=5;st.f2=5.6;st.a1=1;st.a2=1;st.ph=0; setMode('tempo'); }
+      $('#sf1').value=st.f1; $('#sf2').value=st.f2; $('#sa1').value=st.a1; $('#sa2').value=st.a2; $('#sph').value=st.ph;
+      refresh();
+    });
+  });
+  pauseBtn($('#sPause'),st);
+
+  st.draw=function(){
+    var s=setup(cv); if(!s) return;
+    var ctx=s.ctx,w=s.w,h=s.h;
+    var pad=14;
+    var topH=h*0.50, botH=h-topH;
+    var yTop=topH*0.52, yBot=topH+botH*0.52;
+    var ampU=Math.min(topH*0.19,46);      // px per unità di ampiezza (pannello alto)
+    var ampD=Math.min(botH*0.165,42);     // pannello basso (fondo scala 3 unità)
+    var dp=st.ph*Math.PI/180;
+    var cA=cssv('--waveA'), cB=cssv('--waveB'), cR=cssv('--accent'), cM=cssv('--muted');
+    var N=Math.max(160,Math.floor(w-2*pad));
+
+    ctx.strokeStyle=cssv('--line'); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(pad,topH+.5); ctx.lineTo(w-pad,topH+.5); ctx.stroke();
+    axis(ctx,pad,yTop,w-pad); axis(ctx,pad,yBot,w-pad);
+
+    var p1=[],p2=[],pr=[],env=[],envN=[];
+    var i,u,x,val1,val2;
+    for(i=0;i<=N;i++){
+      u=i/N;
+      var px=pad+u*(w-2*pad);
+      if(st.mode==='spazio'){
+        x=u*XWIN;
+        var k1=2*Math.PI*st.f1/VW, k2=2*Math.PI*st.f2/VW;
+        val1=st.a1*Math.sin(k1*x-2*Math.PI*st.f1*st.t);
+        val2=st.a2*Math.sin(k2*x-2*Math.PI*st.f2*st.t+dp);
+      } else {
+        var tt=st.t-TWIN+u*TWIN;
+        val1=st.a1*Math.sin(2*Math.PI*st.f1*tt);
+        val2=st.a2*Math.sin(2*Math.PI*st.f2*tt+dp);
+        var dw=2*Math.PI*(st.f1-st.f2)*tt-dp;
+        var e=Math.sqrt(st.a1*st.a1+st.a2*st.a2+2*st.a1*st.a2*Math.cos(dw));
+        env.push(px,yBot-ampD*e); envN.push(px,yBot+ampD*e);
+      }
+      p1.push(px,yTop-ampU*val1);
+      p2.push(px,yTop-ampU*val2);
+      pr.push(px,yBot-ampD*(val1+val2));
+    }
+    poly(ctx,p1,cA,2.2);
+    poly(ctx,p2,cB,2.2);
+    if(st.mode==='tempo'&&Math.abs(st.f1-st.f2)>0.02){
+      poly(ctx,env,cM,1.2,[5,4]); poly(ctx,envN,cM,1.2,[5,4]);
+    }
+    poly(ctx,pr,cR,2.8);
+
+    label(ctx,'onda 1',pad+2,16,cA,'left',11.5);
+    label(ctx,'onda 2',pad+56,16,cB,'left',11.5);
+    label(ctx,'risultante  y = y₁ + y₂',pad+2,topH+17,cR,'left',11.5);
+    if(st.mode==='spazio'){
+      label(ctx,'asse x (istantanea) — le onde avanzano verso destra',w-pad,topH-6,cM,'right',11);
+      label(ctx,'asse x',w-pad,h-6,cM,'right',11);
+    } else {
+      label(ctx,'tempo t in un punto fissato (ultimi 3 s)',w-pad,topH-6,cM,'right',11);
+      var df=Math.abs(st.f1-st.f2);
+      if(df>0.02) label(ctx,'inviluppo — un battimento ogni '+fmt(1/df,2)+' s',w-pad,h-6,cM,'right',11);
+      else label(ctx,'tempo t',w-pad,h-6,cM,'right',11);
+    }
+  };
+  refresh();
+  SIMS['sovr|sim']=st;
+})();
+
+/* ============================================================
+   SIM 4 — ONDE STAZIONARIE
+   ============================================================ */
+(function(){
+  var cv=$('#cvStaz'); if(!cv) return;
+  var st={t:0,paused:false,mode:'corda-ff',f:100,L:1,v:343};
+  var Q=28, VISUAL_F=1.05;
+
+  function isOdd(){ return st.mode==='corda-fl'||st.mode==='tubo-ca'; }
+  function isTube(){ return st.mode.indexOf('tubo')===0; }
+  function f1(){ return isOdd() ? st.v/(4*st.L) : st.v/(2*st.L); }
+  function fOf(n){ return isOdd() ? (2*n-1)*st.v/(4*st.L) : n*st.v/(2*st.L); }
+  function nearestN(){
+    var base=f1();
+    var n = isOdd() ? Math.round((st.f/base+1)/2) : Math.round(st.f/base);
+    return Math.max(1,Math.min(24,n));
+  }
+  function response(n){
+    var fn=fOf(n), r=st.f/fn;
+    return 1/Math.sqrt(1+Q*Q*Math.pow(r-1/r,2));
+  }
+  function harmonicOrder(n){ return isOdd() ? 2*n-1 : n; }
+
+  function refresh(){
+    $('#zFV').textContent=fmt(st.f,0)+' Hz';
+    $('#zLV').textContent=fmt(st.L,2)+' m';
+    $('#zVV').textContent=fmt(st.v,0)+' m/s';
+    var n=nearestN(), R=response(n);
+    $('#zF1').textContent=fmt(f1(),1)+' Hz';
+    $('#zN').textContent='n° '+harmonicOrder(n)+'  (f = '+fmt(fOf(n),1)+' Hz)';
+    $('#zLam').textContent=fmt(st.v/fOf(n),3)+' m';
+    $('#zRes').textContent=fmt(R*100,0)+'%'+(R>0.9?' — risonanza':'');
+  }
+  $('#zF').addEventListener('input',function(){st.f=parseFloat(this.value);refresh();});
+  $('#zL').addEventListener('input',function(){st.L=parseFloat(this.value);refresh();});
+  $('#zV').addEventListener('input',function(){st.v=parseFloat(this.value);refresh();});
+  $$('[data-staz-mode]').forEach(function(b){
+    b.addEventListener('click',function(){
+      st.mode=b.getAttribute('data-staz-mode');
+      $$('[data-staz-mode]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
+      refresh();
+    });
+  });
+  $$('[data-harm]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var n=parseInt(b.getAttribute('data-harm'),10);
+      var target=fOf(n);
+      var sl=$('#zF');
+      target=Math.max(parseFloat(sl.min),Math.min(parseFloat(sl.max),target));
+      st.f=Math.round(target); sl.value=st.f; refresh();
+    });
+  });
+  pauseBtn($('#zPause'),st);
+
+  st.draw=function(){
+    var s=setup(cv); if(!s) return;
+    var ctx=s.ctx,w=s.w,h=s.h;
+    var pad=34, x0=pad, x1=w-pad, span=x1-x0;
+    var mid=h*0.48;
+    var n=nearestN(), R=response(n);
+    var A=Math.min(h*0.30,80)*R;
+    var cR=cssv('--accent'), cA=cssv('--waveA'), cB=cssv('--waveB'), cM=cssv('--muted');
+    var tube=isTube();
+
+    function shape(u){ // u in [0,1]
+      if(st.mode==='corda-ff') return Math.sin(n*Math.PI*u);
+      if(st.mode==='tubo-aa')  return Math.cos(n*Math.PI*u);
+      return Math.sin((2*n-1)*Math.PI*u/2); // fisso/chiuso a sinistra, libero/aperto a destra
+    }
+
+    // struttura fisica
+    if(tube){
+      var th=Math.min(h*0.34,96);
+      ctx.strokeStyle=cssv('--muted'); ctx.lineWidth=2.5;
+      ctx.beginPath();
+      ctx.moveTo(x0,mid-th); ctx.lineTo(x1,mid-th);
+      ctx.moveTo(x0,mid+th); ctx.lineTo(x1,mid+th);
+      ctx.stroke();
+      ctx.lineWidth=4; ctx.strokeStyle=cssv('--ink2');
+      if(st.mode==='tubo-ca'){ ctx.beginPath(); ctx.moveTo(x0,mid-th); ctx.lineTo(x0,mid+th); ctx.stroke(); }
+      label(ctx,st.mode==='tubo-ca'?'estremo chiuso (nodo)':'estremo aperto (ventre)',x0-4,mid-th-10,cM,'left',11);
+      label(ctx,'estremo aperto (ventre)',x1+4,mid-th-10,cM,'right',11);
+    } else {
+      ctx.strokeStyle=cssv('--ink2'); ctx.lineWidth=4;
+      ctx.beginPath(); ctx.moveTo(x0,mid-46); ctx.lineTo(x0,mid+46); ctx.stroke();
+      if(st.mode==='corda-ff'){ ctx.beginPath(); ctx.moveTo(x1,mid-46); ctx.lineTo(x1,mid+46); ctx.stroke(); }
+      else{
+        ctx.strokeStyle=cssv('--line'); ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+        ctx.beginPath(); ctx.moveTo(x1,mid-52); ctx.lineTo(x1,mid+52); ctx.stroke(); ctx.setLineDash([]);
+        label(ctx,'estremo libero (ventre)',x1+2,mid-58,cM,'right',11);
+      }
+      label(ctx,'estremo fisso (nodo)',x0-2,mid-52,cM,'left',11);
+    }
+
+    axis(ctx,x0,mid,x1);
+
+    // inviluppo
+    var e1=[],e2=[],cur=[];
+    var osc=Math.cos(2*Math.PI*VISUAL_F*st.t);
+    for(var i=0;i<=260;i++){
+      var u=i/260, px=x0+u*span, sh=shape(u);
+      e1.push(px,mid-A*sh); e2.push(px,mid+A*sh);
+      cur.push(px,mid-A*sh*osc);
+    }
+    poly(ctx,e1,cA,1.2,[5,4]); poly(ctx,e2,cA,1.2,[5,4]);
+    poly(ctx,cur,cR,3);
+
+    // nodi
+    ctx.fillStyle=cB;
+    for(var j=0;j<=400;j++){
+      var uu=j/400;
+      var prevv=shape(Math.max(0,uu-1/400));
+      if(uu>0 && shape(uu)===0){}
+    }
+    var nodes=[];
+    if(st.mode==='corda-ff'||st.mode==='tubo-aa'){
+      for(var m=0;m<=n;m++){
+        var un = (st.mode==='corda-ff') ? m/n : (2*m+1)/(2*n);
+        if(un<=1) nodes.push(un);
+      }
+    } else {
+      var M=2*n-1;
+      for(var q=0;q<=n;q++){ var uq=2*q/M; if(uq<=1.0001) nodes.push(uq); }
+    }
+    nodes.forEach(function(un){
+      ctx.beginPath(); ctx.arc(x0+un*span,mid,4,0,6.2832); ctx.fill();
+    });
+
+    // etichette
+    label(ctx,'L = '+fmt(st.L,2)+' m',x0,h-10,cM,'left',11);
+    var lam=st.v/fOf(n);
+    label(ctx,'armonica n° '+harmonicOrder(n)+'  —  λ = '+fmt(lam,3)+' m  —  f = '+fmt(fOf(n),1)+' Hz',w/2,20,cR,'center',12.5);
+    if(R<0.35){
+      label(ctx,'lontano dalla risonanza: nessuna onda stazionaria apprezzabile',w/2,h-10,cM,'center',11.5);
+    } else if(R>0.9){
+      label(ctx,'risonanza',w/2,h-10,cB,'center',11.5);
+    }
+    if(isOdd()) label(ctx,'solo armoniche dispari',x1,h-10,cM,'right',11);
+  };
+  refresh();
+  SIMS['staz|sim']=st;
+})();
+
+/* ============================================================
+   NAVIGAZIONE PRINCIPALE E SOTTOSCHEDE
+   ============================================================ */
+var subState={mecc:'teoria',suono:'teoria',sovr:'teoria',staz:'teoria'};
+var currentArea='storia';
+
+function showSub(area,sub){
+  subState[area]=sub;
+  $$('#panel-'+area+' .subpanel').forEach(function(p){
+    p.hidden = (p.id!=='sub-'+area+'-'+sub);
+  });
+  $$('#panel-'+area+' .subnav-btn').forEach(function(b){
+    b.setAttribute('aria-selected', b.getAttribute('data-sub')===area+'|'+sub ? 'true':'false');
+  });
+  activeSim = SIMS[area+'|'+sub] || null;
+  prevTs=null;
+  if(activeSim){ clearCss(); setTimeout(function(){ if(activeSim) try{activeSim.draw();}catch(e){} },30); }
+}
+function showArea(area){
+  currentArea=area;
+  $$('.panel').forEach(function(p){ p.hidden = (p.id!=='panel-'+area); });
+  $$('#mainTabs .nav-btn').forEach(function(b){
+    b.setAttribute('aria-selected', b.getAttribute('data-area')===area ? 'true':'false');
+  });
+  if(area==='storia'){ activeSim=null; }
+  else showSub(area,subState[area]);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('#mainTabs .nav-btn').forEach(function(b){
+  b.addEventListener('click',function(){ showArea(b.getAttribute('data-area')); });
+});
+$$('.subnav-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    var parts=b.getAttribute('data-sub').split('|');
+    showSub(parts[0],parts[1]);
+  });
+});
+$$('[data-goto]').forEach(function(b){
+  b.addEventListener('click',function(){ showArea(b.getAttribute('data-goto')); });
+});
+
+/* ============================================================
+   ESERCIZI
+   ============================================================ */
+var ESERCIZI={
+mecc:[
+ {q:"Un'onda che si propaga su una corda ha frequenza 25 Hz e lunghezza d'onda 0,80 m. Calcola la velocità di propagazione e il periodo.",
+  hint:"Ti servono soltanto la relazione fondamentale v = λf e la definizione di periodo T = 1/f. Controlla che le unità siano coerenti prima di sostituire.",
+  sol:"v = λ·f = 0,80 m · 25 Hz = 20 m/s.<br>T = 1/f = 1/25 s = 0,040 s = 40 ms.<br>Verifica di coerenza: in un periodo l'onda avanza v·T = 20 · 0,040 = 0,80 m, cioè esattamente una lunghezza d'onda."},
+ {q:"Una corda lunga 1,2 m ha massa 24 g ed è tesa con una forza di 80 N. Qual è la velocità delle onde trasversali che vi si propagano?",
+  hint:"Calcola prima la densità lineare μ = m/L, facendo attenzione a convertire i grammi in chilogrammi; poi applica v = √(F/μ).",
+  sol:"μ = m/L = 0,024 kg / 1,2 m = 0,020 kg/m.<br>v = √(F/μ) = √(80 / 0,020) = √4000 ≈ 63 m/s.<br>Nota che la velocità non dipende né dall'ampiezza né dalla frequenza dell'onda, ma solo dalle proprietà della corda."},
+ {q:"Un'onda è descritta, nel Sistema Internazionale, da y(x,t) = 0,050 · sin(4πx − 20πt). Determina ampiezza, lunghezza d'onda, frequenza, velocità e verso di propagazione.",
+  hint:"Confronta termine a termine con la forma generale y = A·sin(kx − ωt): il coefficiente di x è k, quello di t è ω. Poi usa λ = 2π/k, f = ω/2π, v = ω/k.",
+  sol:"A = 0,050 m.<br>k = 4π rad/m → λ = 2π/k = 0,50 m.<br>ω = 20π rad/s → f = ω/2π = 10 Hz, quindi T = 0,10 s.<br>v = ω/k = 20π/4π = 5,0 m/s.<br>Il segno meno fra kx e ωt indica propagazione nel verso positivo dell'asse x."},
+ {q:"Un'onda sonora di frequenza 680 Hz passa dall'aria (v = 340 m/s) all'acqua (v = 1500 m/s). Che cosa cambia: frequenza, lunghezza d'onda o entrambe? Calcola i valori.",
+  hint:"Chiediti chi impone la frequenza e chi impone la velocità. Una delle due grandezze si conserva nel passaggio fra i mezzi.",
+  sol:"La frequenza è imposta dalla sorgente e resta 680 Hz: le oscillazioni che arrivano al confine per unità di tempo devono essere altrettante di quelle che ripartono.<br>λ<sub>aria</sub> = 340/680 = 0,50 m; λ<sub>acqua</sub> = 1500/680 ≈ 2,2 m.<br>Cambia dunque solo la lunghezza d'onda, che aumenta perché aumenta la velocità."},
+ {q:"Di un'onda su una corda si raddoppia l'ampiezza e contemporaneamente si dimezza la frequenza. Come varia la potenza media trasportata?",
+  hint:"Parti dalla dipendenza ⟨P⟩ = ½ μ v ω²A² e ragiona solo sui fattori che cambiano, senza numeri.",
+  sol:"⟨P⟩ ∝ A²f². Raddoppiando A il fattore A² diventa 4 volte più grande; dimezzando f il fattore f² diventa 1/4.<br>Il prodotto è 4 · 1/4 = 1: la potenza trasportata resta invariata.<br>Il risultato mostra che ampiezza e frequenza pesano allo stesso modo (al quadrato) sull'energia dell'onda."}
+],
+suono:[
+ {q:"Calcola la velocità del suono in aria a 25 °C e la lunghezza d'onda del la<sub>4</sub> (440 Hz) a quella temperatura.",
+  hint:"Usa l'approssimazione lineare v ≈ (331,5 + 0,6·t) m/s con t in gradi Celsius, poi la relazione fondamentale.",
+  sol:"v ≈ 331,5 + 0,6 · 25 = 346,5 m/s.<br>λ = v/f = 346,5 / 440 ≈ 0,788 m.<br>A 0 °C la stessa nota avrebbe λ = 331/440 ≈ 0,752 m: è per questo che gli strumenti a fiato calano di intonazione quando sono freddi."},
+ {q:"Una sorgente puntiforme irradia isotropicamente una potenza acustica di 0,50 W. Determina intensità e livello sonoro a 10 m di distanza, trascurando l'assorbimento.",
+  hint:"L'intensità si distribuisce su una sfera di raggio 10 m: I = P/(4πr²). Per il livello usa L = 10·log₁₀(I/I₀) con I₀ = 10⁻¹² W/m².",
+  sol:"I = 0,50 / (4π · 10²) = 0,50 / 1256,6 ≈ 4,0 · 10⁻⁴ W/m².<br>I/I₀ = 4,0 · 10⁻⁴ / 10⁻¹² = 4,0 · 10⁸.<br>L = 10 · log₁₀(4,0 · 10⁸) = 10 · (8 + 0,60) ≈ 86 dB.<br>A 20 m il livello scenderebbe di circa 6 dB, cioè a 80 dB."},
+ {q:"Un suono passa da 60 dB a 80 dB. Di quale fattore è aumentata l'intensità? E la potenza della sorgente, a parità di distanza?",
+  hint:"La differenza di livello è ΔL = 10·log₁₀(I₂/I₁). Ricava il rapporto invertendo il logaritmo: non serve calcolare le singole intensità.",
+  sol:"ΔL = 20 dB = 10·log₁₀(I₂/I₁) → log₁₀(I₂/I₁) = 2 → I₂/I₁ = 10² = 100.<br>L'intensità è cento volte maggiore; poiché a distanza fissata I ∝ P, anche la potenza è cento volte maggiore.<br>Attenzione a non concludere che il suono è \"venti volte più forte\": la scala dei decibel è logaritmica."},
+ {q:"Un'ambulanza con sirena a 900 Hz viaggia a 25 m/s. Calcola la frequenza percepita da un pedone fermo mentre l'ambulanza si avvicina e mentre si allontana (v = 343 m/s).",
+  hint:"L'osservatore è fermo, quindi v_O = 0 e la formula si riduce a f′ = f·v/(v ∓ v_S). Scegli il segno che fa aumentare f′ in avvicinamento.",
+  sol:"Avvicinamento: f′ = 900 · 343/(343 − 25) = 900 · 343/318 ≈ 971 Hz.<br>Allontanamento: f′ = 900 · 343/(343 + 25) = 900 · 343/368 ≈ 839 Hz.<br>Il salto complessivo al passaggio è di circa 132 Hz, poco più di un intervallo di seconda maggiore: è il tipico \"calo\" che si sente dal marciapiede.<br>Osserva l'asimmetria: l'aumento (+71 Hz) e la diminuzione (−61 Hz) non sono uguali in modulo."},
+ {q:"Due altoparlanti identici, ciascuno dei quali produce da solo 70 dB in un certo punto, vengono accesi insieme. Che livello si misura in quel punto, se i suoni sono incoerenti?",
+  hint:"Con sorgenti incoerenti si sommano le intensità, non i livelli in dB né le ampiezze. Calcola il nuovo rapporto I/I₀.",
+  sol:"70 dB corrispondono a I₁ = 10⁷ · I₀ = 10⁻⁵ W/m².<br>Le due sorgenti incoerenti danno I = 2I₁ = 2·10⁻⁵ W/m².<br>L = 10·log₁₀(2·10⁷) = 70 + 10·log₁₀2 ≈ 73 dB.<br>Raddoppiare l'intensità aggiunge sempre circa 3 dB: due altoparlanti non danno 140 dB, e nemmeno un raddoppio del volume percepito."}
+],
+sovr:[
+ {q:"Due altoparlanti coerenti e in fase emettono a 686 Hz (v = 343 m/s). In un punto P la differenza di cammino vale 0,75 m. L'interferenza è costruttiva o distruttiva?",
+  hint:"Calcola λ e poi il rapporto Δr/λ: se è intero l'interferenza è costruttiva, se è semi-intero è distruttiva.",
+  sol:"λ = v/f = 343/686 = 0,50 m.<br>Δr/λ = 0,75/0,50 = 1,5 = (1 + ½).<br>Il rapporto è semi-intero: le due onde arrivano in opposizione di fase e l'interferenza è <strong>distruttiva</strong>. In quel punto, idealmente, non si sente nulla.<br>In termini di fase: Δφ = 2π·Δr/λ = 3π, equivalente a π."},
+ {q:"Due diapason emettono rispettivamente a 440 Hz e 437 Hz. Che cosa si sente? Calcola la frequenza dei battimenti e quella del suono percepito.",
+  hint:"Applica la formula dei battimenti e ricorda che la frequenza \"udita\" è la media aritmetica delle due.",
+  sol:"f<sub>batt</sub> = |440 − 437| = 3 Hz: si sentono 3 pulsazioni di volume al secondo.<br>La frequenza del suono percepito è (440 + 437)/2 = 438,5 Hz.<br>Il periodo del battimento è 1/3 s ≈ 0,33 s."},
+ {q:"Accordando una chitarra, la corda del la produce 4 battimenti al secondo con un diapason da 440 Hz. Tendendo leggermente la corda i battimenti diventano 6 al secondo. Qual era la frequenza iniziale della corda?",
+  hint:"Le frequenze compatibili con 4 battimenti sono due. Usa l'informazione sull'effetto della tensione (v = √(F/μ), quindi f cresce con F) per scegliere quella giusta.",
+  sol:"Con 4 battimenti la corda può essere a 436 Hz o a 444 Hz.<br>Tendendo la corda la sua frequenza aumenta. Se fosse partita da 436 Hz si sarebbe avvicinata a 440 e i battimenti sarebbero diminuiti; poiché invece aumentano, la corda si stava allontanando da 440 salendo: era già sopra.<br>La frequenza iniziale era quindi <strong>444 Hz</strong>: per accordare bisogna allentare la corda."},
+ {q:"Due onde di uguale ampiezza A e uguale frequenza arrivano in un punto con differenza di fase Δφ = π/3. Calcola l'ampiezza risultante e l'intensità, in funzione dell'intensità I₀ di una singola onda.",
+  hint:"Usa A_R = 2A·|cos(Δφ/2)| e ricorda che l'intensità è proporzionale al quadrato dell'ampiezza.",
+  sol:"A_R = 2A·cos(π/6) = 2A · (√3/2) = √3 · A ≈ 1,73 A.<br>Poiché I ∝ A², si ha I = 3 I₀.<br>Casi limite di controllo: con Δφ = 0 si otterrebbe A_R = 2A e I = 4I₀; con Δφ = π si otterrebbe A_R = 0 e I = 0."},
+ {q:"Due sorgenti coerenti in fase emettono a 1715 Hz (v = 343 m/s). Un punto P dista 3,0 m dalla prima e 3,4 m dalla seconda. Che tipo di interferenza si ha in P?",
+  hint:"Trova λ, poi la differenza di cammino, poi il loro rapporto.",
+  sol:"λ = 343/1715 = 0,20 m.<br>Δr = 3,4 − 3,0 = 0,40 m.<br>Δr/λ = 0,40/0,20 = 2, numero intero: l'interferenza è <strong>costruttiva</strong> e l'ampiezza in P è doppia di quella di una singola sorgente (intensità quadrupla)."}
+],
+staz:[
+ {q:"Una corda di violino lunga 0,65 m, fissa a entrambi gli estremi, è percorsa da onde con velocità 520 m/s. Calcola la frequenza fondamentale, la sua lunghezza d'onda e la frequenza della terza armonica.",
+  hint:"Nel modo fondamentale nella corda entra mezza lunghezza d'onda: λ₁ = 2L. Poi f = v/λ, e le armoniche superiori sono multipli interi.",
+  sol:"λ₁ = 2L = 1,30 m.<br>f₁ = v/λ₁ = 520/1,30 = 400 Hz.<br>f₃ = 3·f₁ = 1200 Hz (con λ₃ = 2L/3 ≈ 0,433 m).<br>La corda vibrante fissa-fissa ammette tutte le armoniche, pari e dispari."},
+ {q:"Confronta un tubo aperto a entrambe le estremità e un tubo chiuso a un'estremità, entrambi lunghi 0,50 m (v = 343 m/s): calcola le rispettive frequenze fondamentali e indica quali armoniche sono presenti.",
+  hint:"Per il tubo aperto λ₁ = 2L, per quello chiuso λ₁ = 4L. Le condizioni al contorno riguardano lo spostamento dell'aria: ventre all'estremo aperto, nodo a quello chiuso.",
+  sol:"Tubo aperto: λ₁ = 1,00 m, f₁ = 343 Hz; sono presenti tutte le armoniche (343, 686, 1029 Hz…).<br>Tubo chiuso: λ₁ = 2,00 m, f₁ = 171,5 Hz; sono presenti solo le armoniche dispari (171,5; 514,5; 857,5 Hz…).<br>A parità di lunghezza il tubo chiuso suona un'ottava sotto, e la mancanza delle armoniche pari ne cambia sensibilmente il timbro."},
+ {q:"Un tubo chiuso a un'estremità entra in risonanza a 512 Hz, e questa è la sua terza armonica. Quanto è lungo il tubo? (v = 343 m/s)",
+  hint:"Per un tubo chiuso le armoniche presenti sono f₁, 3f₁, 5f₁…: la \"terza armonica\" corrisponde a 3v/4L. Ricava L.",
+  sol:"f₃ = 3v/(4L) → L = 3v/(4·f₃) = 3 · 343 / (4 · 512) = 1029/2048 ≈ 0,502 m.<br>Verifica: f₁ = v/4L = 343/2,01 ≈ 171 Hz, e infatti 3·171 ≈ 512 Hz."},
+ {q:"La corda mi di una chitarra emette 330 Hz a vuoto. Premendola al dodicesimo tasto la lunghezza vibrante si dimezza. Quale nota si ottiene? E se, invece, si raddoppiasse la tensione della corda?",
+  hint:"Nel primo caso usa f₁ = v/(2L) tenendo v costante; nel secondo caso ricorda che v = √(F/μ).",
+  sol:"Dimezzando L, con v invariata, f₁ raddoppia: 660 Hz, cioè un'ottava sopra.<br>Raddoppiando la tensione, v aumenta di un fattore √2, e quindi f₁ = √2 · 330 ≈ 467 Hz: un intervallo di poco superiore alla quarta giusta, non un'ottava. Per salire di un'ottava agendo sulla sola tensione occorrerebbe quadruplicarla."},
+ {q:"In un'onda stazionaria su una corda la distanza fra due nodi consecutivi è 12 cm e la frequenza di vibrazione è 1400 Hz. Calcola la lunghezza d'onda e la velocità di propagazione.",
+  hint:"La distanza fra due nodi consecutivi non è λ, ma λ/2. È l'errore più frequente in questo tipo di esercizio.",
+  sol:"λ/2 = 0,12 m → λ = 0,24 m.<br>v = λ·f = 0,24 · 1400 = 336 m/s.<br>Per completezza: la distanza fra un nodo e il ventre adiacente sarebbe λ/4 = 6 cm."}
+]
+};
+
+function renderEsercizi(){
+  Object.keys(ESERCIZI).forEach(function(area){
+    var host=$('#es-'+area); if(!host) return;
+    ESERCIZI[area].forEach(function(ex,i){
+      var box=document.createElement('div');
+      box.className='exbox';
+      box.innerHTML =
+        '<div class="exhead"><span class="exnum">Esercizio '+(i+1)+'</span></div>'+
+        '<div class="exbody">'+ex.q+'</div>'+
+        '<div class="btnrow">'+
+          '<button class="btn" type="button" data-role="hint">Mostra suggerimento</button>'+
+          '<button class="btn" type="button" data-role="sol">Mostra soluzione</button>'+
+        '</div>'+
+        '<div class="reveal" data-box="hint" hidden><span class="lab">Suggerimento</span>'+ex.hint+'</div>'+
+        '<div class="reveal" data-box="sol" hidden><span class="lab">Soluzione</span>'+ex.sol+'</div>';
+      host.appendChild(box);
+      box.addEventListener('click',function(e){
+        var b=e.target.closest('button[data-role]'); if(!b) return;
+        var role=b.getAttribute('data-role');
+        var target=box.querySelector('[data-box="'+role+'"]');
+        var open=!target.hidden;
+        target.hidden=open;
+        b.textContent=(open?'Mostra ':'Nascondi ')+(role==='hint'?'suggerimento':'soluzione');
+      });
+    });
+  });
+}
+renderEsercizi();
+
+/* ============================================================
+   MOTORE DEI QUIZ
+   ============================================================ */
+function shuffle(arr){
+  for(var i=arr.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var tmp=arr[i]; arr[i]=arr[j]; arr[j]=tmp;
+  }
+  return arr;
+}
+var LODI=[
+  "Esatto.","Corretto.","Proprio così.","Risposta giusta.","Ben ragionato.","Perfetto."
+];
+var INCORAGGIA=[
+  "Non è la risposta corretta, ma è un errore che si fa spesso: guarda il ragionamento qui sotto e riprova con la prossima.",
+  "Risposta non corretta. Leggi la spiegazione: il passaggio critico è proprio quello che ti è sfuggito.",
+  "Questa volta no. Il punto delicato è chiarito qui sotto; una volta visto, difficilmente lo sbaglierai ancora.",
+  "Non ci siamo, ma il concetto è meno ostico di quanto sembri: ecco come si arriva alla risposta.",
+  "Risposta errata: capita, questo è uno dei punti in cui l'intuizione inganna. Ecco il ragionamento corretto."
+];
+var LETTERE=['A','B','C','D'];
+
+function makeQuiz(area,titolo,sottotitolo){
+  var host=$('#quiz-'+area); if(!host) return;
+  var data=QUIZ[area];
+  var S={idx:0,order:[],ans:[],view:'q'};
+
+  function build(){
+    S.idx=0; S.view='q'; S.ans=[];
+    S.order=data.map(function(q){
+      var idx=q.o.map(function(_,i){return i;});
+      return shuffle(idx);
+    });
+    data.forEach(function(){S.ans.push(null);});
+  }
+
+  function dotsHTML(){
+    var out='<div class="dots">';
+    for(var i=0;i<data.length;i++){
+      var cls='dot';
+      if(S.ans[i]!==null) cls+= (S.ans[i]===data[i].c)?' good':' bad';
+      if(i===S.idx&&S.view==='q') cls+=' cur';
+      out+='<button class="'+cls+'" type="button" data-jump="'+i+'" aria-label="Vai alla domanda '+(i+1)+'"></button>';
+    }
+    return out+'</div>';
+  }
+
+  function renderQuestion(){
+    var q=data[S.idx], ord=S.order[S.idx], given=S.ans[S.idx];
+    var html='';
+    html+='<h2 style="margin-top:0">'+titolo+'</h2>';
+    html+='<p class="small" style="margin-top:-8px">'+sottotitolo+'</p>';
+    html+='<div class="quizbar"><span class="qmeta">Domanda '+(S.idx+1)+' di '+data.length+'</span>'+dotsHTML()+'</div>';
+    html+='<span class="qkind">'+(q.k==='num'?'Problema numerico':'Teoria')+'</span>';
+    html+='<div class="qtext">'+q.q+'</div>';
+    html+='<div class="opts">';
+    ord.forEach(function(oi,pos){
+      var cls='opt';
+      if(given!==null){
+        if(oi===q.c) cls+=' correct';
+        else if(oi===given) cls+=' chosen-wrong';
+      }
+      html+='<button class="'+cls+'" type="button" data-opt="'+oi+'"'+(given!==null?' disabled':'')+'>'+
+            '<span class="k">'+LETTERE[pos]+'</span><span>'+q.o[oi]+'</span></button>';
+    });
+    html+='</div>';
+    if(given!==null){
+      var ok=(given===q.c);
+      var lead= ok ? LODI[S.idx%LODI.length] : INCORAGGIA[S.idx%INCORAGGIA.length];
+      html+='<div class="fb '+(ok?'good':'bad')+'"><span class="lab">'+(ok?'Risposta corretta':'Rivediamo insieme')+'</span>'+
+            lead+' '+(ok?'':'<br><br><strong>Risposta corretta:</strong> '+q.o[q.c]+'<br>')+
+            (ok?'<br>':'')+q.why+'</div>';
+    }
+    html+='<div class="navq">';
+    html+='<button class="btn" type="button" data-nav="prev"'+(S.idx===0?' disabled':'')+'>&#8592; Domanda precedente</button>';
+    if(S.idx<data.length-1) html+='<button class="btn primary" type="button" data-nav="next">Domanda successiva &#8594;</button>';
+    else html+='<button class="btn primary" type="button" data-nav="res">Vedi il riepilogo</button>';
+    html+='</div>';
+    host.innerHTML=html;
+    typeset(host);
+  }
+
+  function renderResult(){
+    var right=0,rightT=0,rightN=0,totT=0,totN=0,unanswered=0;
+    data.forEach(function(q,i){
+      if(q.k==='num') totN++; else totT++;
+      if(S.ans[i]===null){unanswered++;return;}
+      if(S.ans[i]===q.c){ right++; if(q.k==='num') rightN++; else rightT++; }
+    });
+    var perc=Math.round(100*right/data.length);
+    var msg;
+    if(perc>=90) msg='Padronanza piena dell\'argomento. Puoi passare all\'area successiva con sicurezza.';
+    else if(perc>=70) msg='Buon risultato: le idee centrali ci sono. Rileggi la spiegazione delle domande sbagliate e riprova: il punteggio salirà quasi certamente.';
+    else if(perc>=45) msg='Sei a metà strada. Ti conviene tornare sulla scheda di teoria e poi rifare il quiz: le posizioni delle risposte cambiano, quindi non c\'è modo di andare a memoria.';
+    else msg='Questo argomento richiede ancora un passaggio. Non è un problema: rileggi la teoria, prova la simulazione con calma e ripeti il quiz. Molti concetti diventano evidenti solo dopo averli visti in movimento.';
+    var html='';
+    html+='<h2 style="margin-top:0">Riepilogo</h2>';
+    html+='<div class="score">'+right+' risposte corrette su '+data.length+'</div>';
+    html+='<div class="bar"><i style="width:'+perc+'%"></i></div>';
+    html+='<p class="small">Teoria: '+rightT+'/'+totT+' &#183; Problemi numerici: '+rightN+'/'+totN+
+          (unanswered? ' &#183; domande senza risposta: '+unanswered : '')+'</p>';
+    html+='<p>'+msg+'</p>';
+    html+='<div class="quizbar" style="margin-top:14px">'+dotsHTML()+'</div>';
+    html+='<div class="navq"><button class="btn" type="button" data-nav="review">Rivedi le domande</button>'+
+          '<button class="btn primary" type="button" data-nav="again">Riprova il quiz</button></div>';
+    host.innerHTML=html;
+    typeset(host);
+  }
+
+  function render(){ if(S.view==='res') renderResult(); else renderQuestion(); }
+
+  host.addEventListener('click',function(e){
+    var t=e.target.closest('button'); if(!t) return;
+    if(t.hasAttribute('data-opt')){
+      if(S.ans[S.idx]!==null) return;
+      S.ans[S.idx]=parseInt(t.getAttribute('data-opt'),10);
+      render(); return;
+    }
+    if(t.hasAttribute('data-jump')){
+      S.idx=parseInt(t.getAttribute('data-jump'),10); S.view='q'; render(); return;
+    }
+    var nav=t.getAttribute('data-nav');
+    if(nav==='prev'){ S.idx=Math.max(0,S.idx-1); render(); }
+    else if(nav==='next'){ S.idx=Math.min(data.length-1,S.idx+1); render(); }
+    else if(nav==='res'){ S.view='res'; render(); }
+    else if(nav==='review'){ S.view='q'; S.idx=0; render(); }
+    else if(nav==='again'){ build(); render(); }
+  });
+
+  build(); render();
+}
+
+/* ============================================================
+   TIPOGRAFIA MATEMATICA (KaTeX)
+   ============================================================ */
+var mathFallback=false;
+function typeset(el){
+  var target=el||document.body;
+  if(typeof window.renderMathInElement==='function'){
+    try{
+      window.renderMathInElement(target,{
+        delimiters:[
+          {left:'\\[',right:'\\]',display:true},
+          {left:'\\(',right:'\\)',display:false}
+        ],
+        throwOnError:false
+      });
+    }catch(e){}
+    return;
+  }
+  if(mathFallback) fallbackMath(target);
+}
+
+/* Se il CDN di KaTeX non è raggiungibile (uso offline, rete scolastica filtrata)
+   le formule vengono comunque rese leggibili in notazione lineare. */
+var SIMBOLI={
+  '\\lambda':'λ','\\omega':'ω','\\varphi':'φ','\\phi':'φ','\\mu':'μ','\\rho':'ρ',
+  '\\gamma':'γ','\\theta':'θ','\\pi':'π','\\Delta':'Δ','\\partial':'∂','\\alpha':'α','\\beta':'β',
+  '\\times':'×','\\cdot':'·','\\approx':'≈','\\pm':'±','\\mp':'∓','\\ge':'≥','\\le':'≤',
+  '\\geq':'≥','\\leq':'≤','\\neq':'≠','\\Longrightarrow':'⇒','\\Rightarrow':'⇒',
+  '\\Leftrightarrow':'⇔','\\to':'→','\\dots':'…','\\ldots':'…','\\langle':'⟨','\\rangle':'⟩',
+  '\\propto':'∝','\\infty':'∞','\\circ':'°'
+};
+var GRECHE={'\\lambda':1,'\\omega':1,'\\varphi':1,'\\phi':1,'\\mu':1,'\\rho':1,'\\gamma':1,
+            '\\theta':1,'\\pi':1,'\\Delta':1,'\\partial':1,'\\alpha':1,'\\beta':1,'\\langle':1};
+var SUP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
+         '+':'⁺','-':'⁻','(':'⁽',')':'⁾','n':'ⁿ'};
+var SUB={'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉',
+         '+':'₊','-':'₋','(':'₍',')':'₎','n':'ₙ','o':'ₒ','a':'ₐ','x':'ₓ','e':'ₑ'};
+function toScript(txt,map){
+  var out='';
+  for(var i=0;i<txt.length;i++){
+    var c=txt.charAt(i);
+    if(!map[c]) return null;
+    out+=map[c];
+  }
+  return out;
+}
+function grp(x){
+  return /^[^\s+\-=/·×⇒]+$/.test(x) ? x : '('+x+')';
+}
+function plainMath(src){
+  var s=src;
+  s=s.replace(/\\underbrace\{((?:[^{}]|\{[^{}]*\})*)\}_\{((?:[^{}]|\{[^{}]*\})*)\}/g,function(m,a){return a;});
+  s=s.replace(/\\(?:text|mathrm|mathbf|mathit|mathcal|operatorname)\{([^{}]*)\}/g,'$1');
+  s=s.replace(/\\(?:left|right|big|Big|bigg|Bigg|displaystyle)\b/g,'');
+  s=s.replace(/\\[!,;:]/g,'');
+  s=s.replace(/\\q?quad/g,'   ');
+  Object.keys(SIMBOLI).forEach(function(k){
+    var esc=k.replace(/[\\^$*+?.()|[\]{}]/g,'\\$&');
+    // per le lettere greche si assorbe anche lo spazio che separa il comando
+    var re=new RegExp(esc+(GRECHE[k]?'\\s*':''),'g');
+    s=s.replace(re,SIMBOLI[k]);
+  });
+  s=s.replace(/\\(sin|cos|tan|log|ln|exp|max|min)\b/g,'$1');
+  s=s.replace(/\^\{([^{}]*)\}|\^(\S)/g,function(m,a,b){
+    var t=(a!==undefined?a:b), u=toScript(t,SUP);
+    return u!==null?u:'^'+grp(t);
+  });
+  s=s.replace(/_\{([^{}]*)\}|_(\S)/g,function(m,a,b){
+    var t=(a!==undefined?a:b), u=toScript(t,SUB);
+    return u!==null?u:'_'+t;
+  });
+  for(var i=0;i<3;i++){
+    s=s.replace(/\\[dt]?frac\{([^{}]*)\}\{([^{}]*)\}/g,function(m,a,b){
+      return grp(a.trim())+'/'+grp(b.trim());
+    });
+  }
+  s=s.replace(/\\sqrt\{([^{}]*)\}/g,function(m,a){return '√'+grp(a.trim());});
+  s=s.replace(/[{}]/g,'').replace(/\\/g,'');
+  return s.replace(/\s+/g,' ').trim();
+}
+function fallbackMath(rootEl){
+  var walker=document.createTreeWalker(rootEl,NodeFilter.SHOW_TEXT,null,false);
+  var nodes=[],n;
+  while((n=walker.nextNode())){
+    if(/\\\(|\\\[/.test(n.nodeValue)) nodes.push(n);
+  }
+  nodes.forEach(function(node){
+    var par=node.parentNode;
+    if(!par||par.nodeName==='SCRIPT'||par.nodeName==='STYLE') return;
+    var txt=node.nodeValue, frag=document.createDocumentFragment();
+    var re=/\\\[([\s\S]*?)\\\]|\\\(([\s\S]*?)\\\)/g, last=0, m;
+    while((m=re.exec(txt))!==null){
+      if(m.index>last) frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
+      var disp=(m[1]!==undefined);
+      var span=document.createElement('span');
+      span.className='mathfb'+(disp?' disp':'');
+      span.textContent=plainMath(disp?m[1]:m[2]);
+      frag.appendChild(span);
+      last=re.lastIndex;
+    }
+    if(last<txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+    par.replaceChild(frag,node);
+  });
+}
+function waitForKatex(tries){
+  if(typeof window.renderMathInElement==='function'){ typeset(document.body); return; }
+  if(tries<=0){ mathFallback=true; fallbackMath(document.body); return; }
+  setTimeout(function(){ waitForKatex(tries-1); },300);
+}
+window.addEventListener('load',function(){ waitForKatex(14); });
+
+/* ============================================================
+   BANCHE DI DOMANDE
+   ============================================================ */
+var QUIZ={};
+
+QUIZ.mecc=[
+ {k:'t',q:"Che cosa si propaga in un'onda meccanica?",
+  o:["Energia e quantità di moto, mentre le particelle del mezzo oscillano attorno all'equilibrio",
+     "La materia del mezzo, che viene trasportata dalla sorgente al ricevitore",
+     "Solo la forma geometrica dell'onda, senza alcun trasferimento di energia",
+     "Un flusso di particelle emesse dalla sorgente"],
+  c:0,
+  why:"L'onda trasporta energia e quantità di moto attraverso il mezzo, ma ogni particella si limita a oscillare attorno alla propria posizione di equilibrio. Il tappo sull'acqua sale e scende e resta dov'è: è l'immagine da tenere in mente."},
+ {k:'t',q:"Perché le onde trasversali non si propagano all'interno di un fluido?",
+  o:["Perché un fluido non oppone forze di richiamo agli scorrimenti trasversali",
+     "Perché nei fluidi la densità è troppo bassa",
+     "Perché nei fluidi la velocità del suono è troppo elevata",
+     "Perché i fluidi assorbono completamente l'energia trasversale"],
+  c:0,
+  why:"Una perturbazione trasversale può propagarsi solo se il mezzo reagisce elasticamente agli scorrimenti. I fluidi non hanno rigidità di taglio, quindi al loro interno viaggiano solo onde longitudinali. È così che si è scoperto che il nucleo esterno della Terra è liquido: le onde sismiche S non lo attraversano."},
+ {k:'t',q:"Da che cosa dipende la velocità di propagazione di un'onda meccanica?",
+  o:["Solo dalle proprietà elastiche e inerziali del mezzo",
+     "Dalla frequenza imposta dalla sorgente",
+     "Dall'ampiezza dell'onda",
+     "Dalla lunghezza d'onda, che la determina univocamente"],
+  c:0,
+  why:"La velocità è fissata dal mezzo attraverso il rapporto fra una grandezza di rigidità e una di inerzia (per la corda, v = √(F/μ)). Frequenza e ampiezza sono decise dalla sorgente e non la modificano: al variare di f cambia λ, in modo che il prodotto λf resti uguale a v."},
+ {k:'t',q:"Un'onda passa da un mezzo a un altro in cui la velocità è maggiore. Quale grandezza rimane invariata?",
+  o:["La frequenza","La lunghezza d'onda","La velocità di propagazione","Il numero d'onda k"],
+  c:0,
+  why:"Al confine fra i due mezzi le oscillazioni devono raccordarsi istante per istante: il numero di oscillazioni al secondo che arrivano è uguale a quello che riparte, quindi f si conserva. Aumentando v aumenta di conseguenza λ = v/f."},
+ {k:'t',q:"Qual è la relazione corretta fra numero d'onda k e lunghezza d'onda λ?",
+  o:["k = 2π/λ","k = λ/2π","k = 1/λ","k = 2πλ"],
+  c:0,
+  why:"Il numero d'onda misura la fase accumulata per unità di lunghezza: avanzando di una lunghezza d'onda la fase deve crescere di 2π, quindi k·λ = 2π, cioè k = 2π/λ. È l'analogo spaziale di ω = 2π/T."},
+ {k:'t',q:"Se si raddoppia l'ampiezza di un'onda mantenendone invariata la frequenza, l'energia trasportata:",
+  o:["diventa quattro volte maggiore","raddoppia","resta la stessa","diventa otto volte maggiore"],
+  c:0,
+  why:"L'energia e la potenza trasportate sono proporzionali al quadrato dell'ampiezza (⟨P⟩ = ½μvω²A²). Raddoppiando A il fattore A² si moltiplica per 4."},
+ {k:'t',q:"In un'onda longitudinale le particelle del mezzo oscillano:",
+  o:["parallelamente alla direzione di propagazione","perpendicolarmente alla direzione di propagazione",
+     "lungo traiettorie circolari","in modo casuale attorno all'equilibrio"],
+  c:0,
+  why:"Nelle onde longitudinali lo spostamento delle particelle avviene lungo la stessa direzione in cui l'onda avanza: si formano così zone di compressione e di rarefazione. Il suono è l'esempio principale."},
+ {k:'t',q:"L'espressione y(x,t) = A·sin(kx + ωt) descrive un'onda che si propaga:",
+  o:["nel verso negativo dell'asse x","nel verso positivo dell'asse x",
+     "in entrambi i versi contemporaneamente","in nessun verso: è un'onda stazionaria"],
+  c:0,
+  why:"Il profilo si mantiene dove la fase è costante: kx + ωt = cost implica x = (cost − ωt)/k, cioè x che diminuisce al crescere di t. Il segno più corrisponde quindi a propagazione verso le x decrescenti; il segno meno a quella verso le x crescenti."},
+ {k:'t',q:"Che cos'è un fronte d'onda?",
+  o:["Il luogo dei punti del mezzo che oscillano in fase fra loro",
+     "Il punto più avanzato raggiunto dall'onda",
+     "La linea lungo cui si propaga l'energia",
+     "Il luogo dei punti in cui l'ampiezza è massima"],
+  c:0,
+  why:"Il fronte d'onda è la superficie che unisce i punti che si trovano nello stesso stato di oscillazione (stessa fase). I raggi, perpendicolari ai fronti, indicano invece la direzione di propagazione dell'energia."},
+ {k:'t',q:"Se si quadruplica la tensione di una corda mantenendone invariata la densità lineare, la velocità delle onde:",
+  o:["raddoppia","quadruplica","resta invariata","si riduce a metà"],
+  c:0,
+  why:"Da v = √(F/μ) segue che v è proporzionale alla radice quadrata della tensione: quadruplicando F la velocità si moltiplica per √4 = 2. È il motivo per cui, per salire di un'ottava agendo solo sulla tensione di una corda, occorrerebbe quadruplicarla."},
+ {k:'num',q:"Un'onda sonora ha frequenza 50 Hz e si propaga a 340 m/s. Quanto vale la lunghezza d'onda?",
+  o:["6,8 m","0,15 m","17 m","1,7 m"],
+  c:0,
+  why:"λ = v/f = 340/50 = 6,8 m. Se hai ottenuto 0,15 m hai calcolato f/v: controlla sempre che il risultato di una lunghezza d'onda abbia le dimensioni di una lunghezza."},
+ {k:'num',q:"Un'onda ha lunghezza d'onda 0,25 m e periodo 0,050 s. Qual è la sua velocità di propagazione?",
+  o:["5,0 m/s","0,0125 m/s","20 m/s","0,20 m/s"],
+  c:0,
+  why:"v = λ/T = 0,25 / 0,050 = 5,0 m/s. Equivalentemente f = 1/T = 20 Hz e v = λf = 0,25 · 20 = 5,0 m/s."},
+ {k:'num',q:"Un'onda è descritta da y(x,t) = 0,020·sin(10x − 400t) nel SI. Quanto valgono velocità e lunghezza d'onda?",
+  o:["v = 40 m/s e λ ≈ 0,63 m","v = 4000 m/s e λ ≈ 0,63 m","v = 40 m/s e λ = 10 m","v = 0,025 m/s e λ ≈ 6,3 m"],
+  c:0,
+  why:"Confrontando con y = A·sin(kx − ωt): k = 10 rad/m e ω = 400 rad/s. Quindi v = ω/k = 400/10 = 40 m/s e λ = 2π/k = 2π/10 ≈ 0,63 m."},
+ {k:'num',q:"Una corda di densità lineare 0,010 kg/m è tesa con una forza di 90 N. Qual è la velocità delle onde trasversali?",
+  o:["95 m/s","9,0 m/s","900 m/s","0,011 m/s"],
+  c:0,
+  why:"v = √(F/μ) = √(90 / 0,010) = √9000 ≈ 94,9 m/s, cioè circa 95 m/s. Un errore frequente è dimenticare la radice quadrata e ottenere 9000."},
+ {k:'num',q:"Di un'onda si raddoppia l'ampiezza e si triplica la frequenza. Di quale fattore aumenta la potenza media trasportata?",
+  o:["36","6","12","9"],
+  c:0,
+  why:"⟨P⟩ ∝ A²f². Il fattore diventa 2² · 3² = 4 · 9 = 36. Se hai risposto 6 hai moltiplicato i fattori senza elevarli al quadrato."}
+];
+
+QUIZ.suono=[
+ {k:'t',q:"Dal punto di vista fisico, un'onda sonora in aria è:",
+  o:["un'onda longitudinale di compressioni e rarefazioni","un'onda trasversale di pressione",
+     "un'onda elettromagnetica a bassa frequenza","un flusso di molecole d'aria dalla sorgente all'orecchio"],
+  c:0,
+  why:"La sorgente comprime alternativamente lo strato d'aria adiacente: la perturbazione di pressione si propaga longitudinalmente. Le molecole oscillano avanti e indietro di frazioni di millimetro senza spostarsi in blocco."},
+ {k:'t',q:"Perché il suono non si propaga nel vuoto?",
+  o:["Perché manca il mezzo materiale che può essere compresso e rarefatto",
+     "Perché nel vuoto la velocità del suono sarebbe infinita",
+     "Perché nel vuoto la pressione è troppo bassa per l'orecchio umano",
+     "Perché il suono viene assorbito dalle pareti del recipiente"],
+  c:0,
+  why:"Il suono è la propagazione di una perturbazione elastica: senza materia non c'è nulla da comprimere. È l'esperimento della campanella nella campana pneumatica realizzato da Boyle nel Seicento."},
+ {k:'t',q:"Come si ordinano generalmente le velocità del suono nei tre stati di aggregazione?",
+  o:["solidi > liquidi > gas","gas > liquidi > solidi","liquidi > solidi > gas","è la stessa in tutti i mezzi"],
+  c:0,
+  why:"Vale v = √(rigidità/densità). Passando da gas a liquidi e a solidi la rigidità (modulo di compressibilità o di Young) cresce di molti ordini di grandezza, mentre la densità cresce assai meno: il rapporto, e quindi v, aumenta. In aria 343 m/s, in acqua circa 1480 m/s, nell'acciaio circa 5900 m/s."},
+ {k:'t',q:"Da quale grandezza dipende in modo apprezzabile la velocità del suono in aria?",
+  o:["Dalla temperatura","Dalla pressione atmosferica","Dalla frequenza del suono","Dall'intensità del suono"],
+  c:0,
+  why:"Per un gas ideale v = √(γRT/M): la velocità cresce con la radice della temperatura assoluta. Non dipende invece dalla pressione, perché aumentando p aumenta proporzionalmente anche ρ e il rapporto resta invariato; e non dipende dalla frequenza, altrimenti una melodia arriverebbe scomposta."},
+ {k:'t',q:"Raddoppiare l'intensità di un suono corrisponde a un aumento del livello sonoro di circa:",
+  o:["3 dB","2 dB","6 dB","10 dB"],
+  c:0,
+  why:"ΔL = 10·log₁₀2 ≈ 3,0 dB. Il valore di 10 dB corrisponde invece a un'intensità dieci volte maggiore, e 6 dB a un'intensità quadrupla."},
+ {k:'t',q:"Per una sorgente puntiforme isotropa in un mezzo non assorbente, l'intensità sonora:",
+  o:["è inversamente proporzionale al quadrato della distanza",
+     "è inversamente proporzionale alla distanza",
+     "decresce esponenzialmente con la distanza",
+     "non dipende dalla distanza"],
+  c:0,
+  why:"La stessa potenza si distribuisce su superfici sferiche di area 4πr², che cresce con il quadrato del raggio: I = P/(4πr²). Raddoppiando la distanza l'intensità si riduce a un quarto, cioè il livello cala di circa 6 dB."},
+ {k:'t',q:"Una sorgente sonora si allontana da un osservatore fermo. Che cosa percepisce l'osservatore?",
+  o:["Una frequenza minore di quella emessa, perché i fronti d'onda gli giungono più diradati",
+     "Una frequenza maggiore di quella emessa","La stessa frequenza, ma un'intensità minore",
+     "Una frequenza minore soltanto se la sorgente supera la velocità del suono"],
+  c:0,
+  why:"Allontanandosi, la sorgente emette ogni fronte d'onda da una posizione più lontana: i fronti si diradano, la lunghezza d'onda che raggiunge l'osservatore aumenta e la frequenza percepita diminuisce. È il calo di tono che si sente quando l'ambulanza ci ha superati."},
+ {k:'t',q:"Perché l'effetto Doppler non è simmetrico fra il caso di sorgente in moto e quello di osservatore in moto?",
+  o:["Perché nel primo caso cambia la lunghezza d'onda emessa, nel secondo cambia la velocità relativa con cui l'osservatore incontra i fronti",
+     "Perché nel secondo caso la velocità del suono cambia",
+     "Perché la sorgente emette più energia quando si muove",
+     "In realtà è perfettamente simmetrico: le due formule coincidono sempre"],
+  c:0,
+  why:"Il mezzo definisce un riferimento privilegiato. Se si muove la sorgente, i fronti si addensano nello spazio e λ cambia davvero; se si muove l'osservatore, λ resta quella emessa ma l'osservatore incontra i fronti a un ritmo diverso. Le due formule danno risultati vicini a basse velocità ma non identici."},
+ {k:'t',q:"Che cosa distingue due strumenti che suonano la stessa nota con la stessa intensità?",
+  o:["Il timbro, cioè le ampiezze relative delle armoniche superiori",
+     "L'altezza del suono","Il livello sonoro in decibel","La velocità di propagazione del suono che emettono"],
+  c:0,
+  why:"L'altezza dipende dalla frequenza fondamentale ed è la stessa per ipotesi; l'intensità è pure la stessa. Ciò che resta è la composizione spettrale, cioè quali armoniche sono presenti e con quale peso: è il timbro, studiato per primo da Helmholtz."},
+ {k:'t',q:"Quando si forma il cono di Mach?",
+  o:["Quando la velocità della sorgente eguaglia o supera quella del suono nel mezzo",
+     "Quando la sorgente si avvicina molto rapidamente all'osservatore, a qualunque velocità",
+     "Quando la frequenza emessa supera il limite dell'udibile",
+     "Quando l'intensità supera la soglia del dolore"],
+  c:0,
+  why:"Se v_S ≥ v la sorgente non è più preceduta dai propri fronti d'onda, che si accumulano su una superficie conica di semiapertura data da sinθ = v/v_S. L'onda d'urto che ne risulta è percepita come boom sonico."},
+ {k:'num',q:"Qual è la velocità del suono in aria a 10 °C, usando l'approssimazione lineare?",
+  o:["337,5 m/s","331,5 m/s","343,5 m/s","325,5 m/s"],
+  c:0,
+  why:"v ≈ 331,5 + 0,6·t = 331,5 + 0,6·10 = 337,5 m/s. Il valore di 331,5 m/s corrisponde a 0 °C, quello di circa 343 m/s a 20 °C."},
+ {k:'num',q:"Una sorgente puntiforme emette 1,0 W di potenza acustica. Qual è il livello sonoro a 5,0 m di distanza?",
+  o:["circa 95 dB","circa 85 dB","circa 105 dB","circa 75 dB"],
+  c:0,
+  why:"I = P/(4πr²) = 1,0/(4π·25) ≈ 3,2·10⁻³ W/m². Quindi I/I₀ = 3,2·10⁹ e L = 10·log₁₀(3,2·10⁹) ≈ 10·(9 + 0,50) ≈ 95 dB."},
+ {k:'num',q:"Il livello sonoro passa da 80 dB a 86 dB. Di quale fattore è aumentata l'intensità?",
+  o:["circa 4","circa 2","circa 6","circa 10"],
+  c:0,
+  why:"ΔL = 6 dB → I₂/I₁ = 10^0,6 ≈ 4,0. Vale la pena memorizzare le due scorciatoie: +3 dB significa intensità doppia, +6 dB intensità quadrupla."},
+ {k:'num',q:"Un treno viaggia a 30 m/s emettendo un fischio di 500 Hz e si avvicina a un osservatore fermo (v = 343 m/s). Quale frequenza percepisce l'osservatore?",
+  o:["circa 548 Hz","circa 460 Hz","circa 500 Hz","circa 596 Hz"],
+  c:0,
+  why:"Con osservatore fermo: f′ = f·v/(v − v_S) = 500 · 343/(343 − 30) = 500 · 343/313 ≈ 548 Hz. Il valore di 460 Hz si otterrebbe con il treno in allontanamento."},
+ {k:'num',q:"Ci si allontana da una sorgente puntiforme passando da 2,0 m a 8,0 m. Di quanto varia il livello sonoro?",
+  o:["diminuisce di circa 12 dB","diminuisce di circa 6 dB","diminuisce di circa 4 dB","diminuisce di circa 24 dB"],
+  c:0,
+  why:"La distanza si moltiplica per 4, quindi l'intensità si divide per 16. ΔL = 10·log₁₀(1/16) = −10·1,204 ≈ −12 dB. Regola pratica: ogni raddoppio di distanza toglie 6 dB, e qui i raddoppi sono due."}
+];
+
+QUIZ.sovr=[
+ {k:'t',q:"Che cosa afferma il principio di sovrapposizione?",
+  o:["Lo spostamento risultante in ogni punto è la somma algebrica degli spostamenti dovuti alle singole onde",
+     "Le onde si sommano solo se hanno la stessa frequenza",
+     "L'ampiezza risultante è sempre la somma delle ampiezze",
+     "L'onda più intensa prevale e cancella l'altra"],
+  c:0,
+  why:"Poiché l'equazione delle onde è lineare, le soluzioni si sommano: y = y₁ + y₂, istante per istante e punto per punto. Si tratta di somma algebrica, quindi con i segni: se in un istante gli spostamenti sono opposti, il risultato è minore di ciascuno dei due."},
+ {k:'t',q:"Che cosa accade a due impulsi che si incontrano su una corda dopo che si sono attraversati?",
+  o:["Ciascuno prosegue immutato, con la forma e la velocità di prima",
+     "Si fondono in un unico impulso di ampiezza doppia",
+     "Si annullano reciprocamente","Rimbalzano l'uno sull'altro invertendo il verso"],
+  c:0,
+  why:"La sovrapposizione riguarda solo l'intervallo di tempo in cui gli impulsi si trovano nella stessa regione. Dopo l'incontro ciascuno riprende esattamente la propria forma: è per questo che due persone possono parlare contemporaneamente senza che le voci si guastino a vicenda."},
+ {k:'t',q:"Due sorgenti si dicono coerenti quando:",
+  o:["hanno la stessa frequenza e una differenza di fase costante nel tempo",
+     "hanno la stessa ampiezza","emettono esattamente in fase","si trovano alla stessa distanza dall'osservatore"],
+  c:0,
+  why:"La coerenza richiede stessa frequenza e differenza di fase stabile: solo così la figura di interferenza resta ferma abbastanza a lungo da poter essere osservata. Le ampiezze possono anche essere diverse, e la differenza di fase può essere diversa da zero purché costante."},
+ {k:'t',q:"Due sorgenti coerenti e in fase producono interferenza costruttiva in un punto quando la differenza di cammino vale:",
+  o:["un multiplo intero della lunghezza d'onda","un multiplo dispari di mezza lunghezza d'onda",
+     "un multiplo intero di un quarto di lunghezza d'onda","zero, e soltanto zero"],
+  c:0,
+  why:"Δr = nλ significa che una delle due onde è arrivata compiendo esattamente n oscillazioni in più: i due contributi risultano in fase e le ampiezze si sommano. La condizione Δr = (n + ½)λ dà invece interferenza distruttiva."},
+ {k:'t',q:"Nell'interferenza completamente costruttiva di due onde uguali di intensità I₀ ciascuna, l'intensità risultante è:",
+  o:["4 I₀","2 I₀","I₀","8 I₀"],
+  c:0,
+  why:"L'ampiezza raddoppia e l'intensità, proporzionale al quadrato dell'ampiezza, quadruplica. L'energia non viene creata: quella in eccesso nei massimi è esattamente quella sottratta ai minimi, e mediando su tutto lo spazio si ritrova 2I₀."},
+ {k:'t',q:"La frequenza dei battimenti fra due suoni di frequenza f₁ e f₂ vale:",
+  o:["|f₁ − f₂|","(f₁ + f₂)/2","|f₁ − f₂|/2","f₁ · f₂"],
+  c:0,
+  why:"L'ampiezza è modulata da un coseno di frequenza |f₁ − f₂|/2, ma l'orecchio percepisce l'intensità, che dipende dal quadrato dell'ampiezza e ha quindi un massimo per ogni semiperiodo: le pulsazioni udibili al secondo sono |f₁ − f₂|."},
+ {k:'t',q:"Sovrapponendo due suoni di 300 Hz e 304 Hz, quale altezza si percepisce?",
+  o:["Un suono a 302 Hz che pulsa 4 volte al secondo",
+     "Due suoni distinti a 300 e 304 Hz","Un suono a 4 Hz","Un suono a 604 Hz che pulsa 2 volte al secondo"],
+  c:0,
+  why:"La sovrapposizione dà un'oscillazione alla frequenza media (300 + 304)/2 = 302 Hz, con ampiezza modulata: si sentono 4 pulsazioni di volume al secondo. Le due componenti tornano distinguibili solo quando la differenza supera una ventina di hertz."},
+ {k:'t',q:"L'interferenza distruttiva sembra far sparire energia. Come si concilia con il principio di conservazione?",
+  o:["L'energia non scompare: viene ridistribuita, sottratta ai minimi e concentrata nei massimi",
+     "L'energia viene convertita in calore nel punto di minimo",
+     "L'energia viene restituita alle sorgenti",
+     "Il principio di conservazione non vale per le onde"],
+  c:0,
+  why:"L'interferenza è un fenomeno di redistribuzione spaziale dell'energia. Dove l'intensità vale 4I₀ c'è un eccesso che compensa esattamente gli zeri: il bilancio complessivo, integrato su tutte le direzioni, resta 2I₀."},
+ {k:'t',q:"Qual è la relazione fra differenza di cammino e differenza di fase per due sorgenti in fase?",
+  o:["Δφ = 2π·Δr/λ","Δφ = Δr/λ","Δφ = π·Δr/λ","Δφ = 2π·λ/Δr"],
+  c:0,
+  why:"Percorrere una lunghezza d'onda in più significa accumulare 2π di fase in più; la proporzione dà Δφ = 2π·Δr/λ. Sostituendo Δr = λ si ritrova 2π (costruttiva), con Δr = λ/2 si ottiene π (distruttiva)."},
+ {k:'t',q:"Perché i battimenti si percepiscono solo quando le due frequenze sono vicine?",
+  o:["Perché se la differenza supera circa 20 Hz le pulsazioni diventano troppo rapide e l'orecchio distingue due suoni separati",
+     "Perché con frequenze molto diverse la formula dei battimenti non è più valida",
+     "Perché le onde non si sovrappongono se le frequenze sono diverse",
+     "Perché l'orecchio umano non percepisce differenze di intensità"],
+  c:0,
+  why:"La somma di due sinusoidi produce sempre una modulazione di ampiezza, ma il nostro sistema uditivo la interpreta come una pulsazione di volume solo se è abbastanza lenta. Oltre una ventina di hertz si passa gradualmente alla percezione di due altezze distinte, con una sensazione di dissonanza."},
+ {k:'num',q:"Due diapason emettono a 500 Hz e 504 Hz. Quanti battimenti al secondo si sentono e con quale periodo?",
+  o:["4 battimenti al secondo, periodo 0,25 s","2 battimenti al secondo, periodo 0,50 s",
+     "8 battimenti al secondo, periodo 0,125 s","502 battimenti al secondo, periodo 2,0 ms"],
+  c:0,
+  why:"f_batt = |504 − 500| = 4 Hz, quindi il periodo del battimento è T = 1/4 = 0,25 s. La frequenza del suono udito è invece la media, 502 Hz."},
+ {k:'num',q:"Due sorgenti coerenti in fase emettono onde di lunghezza d'onda 0,40 m. In un punto la differenza di cammino è 1,0 m. Che interferenza si osserva?",
+  o:["Distruttiva, perché Δr = 2,5 λ","Costruttiva, perché Δr = 2,5 λ",
+     "Costruttiva, perché Δr è maggiore di λ","Nessuna interferenza, perché Δr non è multiplo di λ"],
+  c:0,
+  why:"Δr/λ = 1,0/0,40 = 2,5, cioè un multiplo semi-intero: le onde arrivano in opposizione di fase (Δφ = 5π, equivalente a π) e l'interferenza è distruttiva."},
+ {k:'num',q:"Due onde di uguale ampiezza A si sovrappongono con differenza di fase π/2. Quanto valgono ampiezza risultante e intensità (con I₀ intensità di una singola onda)?",
+  o:["A_R = √2·A e I = 2 I₀","A_R = 2A e I = 4 I₀","A_R = A e I = I₀","A_R = 0 e I = 0"],
+  c:0,
+  why:"A_R = 2A·|cos(Δφ/2)| = 2A·cos(π/4) = 2A·(√2/2) = √2·A. Poiché I ∝ A², si ottiene I = 2I₀: con sfasamento di un quarto di periodo le intensità si sommano semplicemente, come per sorgenti incoerenti."},
+ {k:'num',q:"Due altoparlanti coerenti e in fase emettono a 686 Hz (v = 343 m/s). Qual è la minima differenza di cammino non nulla che produce silenzio?",
+  o:["0,25 m","0,50 m","1,0 m","0,125 m"],
+  c:0,
+  why:"λ = 343/686 = 0,50 m. La condizione di interferenza distruttiva è Δr = (n + ½)λ, e il valore minimo positivo si ha per n = 0: Δr = λ/2 = 0,25 m."},
+ {k:'num',q:"Una corda produce 2 battimenti al secondo con un diapason da 256 Hz. Allentando leggermente la corda i battimenti aumentano a 4 al secondo. Qual era la frequenza iniziale della corda?",
+  o:["254 Hz","258 Hz","252 Hz","260 Hz"],
+  c:0,
+  why:"Con 2 battimenti la corda poteva essere a 254 o a 258 Hz. Allentandola la sua frequenza diminuisce; poiché i battimenti aumentano, la corda si sta allontanando dai 256 Hz scendendo, quindi partiva da sotto: 254 Hz. Per accordarla occorre tenderla."}
+];
+
+QUIZ.staz=[
+ {k:'t',q:"Come si genera un'onda stazionaria?",
+  o:["Dalla sovrapposizione di due onde identiche che si propagano in versi opposti",
+     "Da un'onda che rallenta fino a fermarsi nel mezzo",
+     "Dalla sovrapposizione di due onde di frequenza molto diversa",
+     "Da un'onda che perde energia per attrito"],
+  c:0,
+  why:"Tipicamente si tratta di un'onda e della sua riflessa all'estremo del mezzo. Il risultato, y = 2A·sin(kx)·cos(ωt), non trasporta energia lungo il mezzo: il profilo non avanza, oscilla sul posto."},
+ {k:'t',q:"Che cosa si forma in corrispondenza di un estremo fisso di una corda?",
+  o:["Un nodo, e l'onda riflessa è invertita di fase","Un ventre, e l'onda riflessa non è invertita",
+     "Un nodo, ma senza inversione di fase","Un ventre, con inversione di fase"],
+  c:0,
+  why:"In un estremo fisso lo spostamento è vincolato a essere sempre nullo: lì si forma necessariamente un nodo, e questo richiede che l'onda riflessa torni indietro sfasata di π rispetto a quella incidente. Un estremo libero dà invece un ventre, senza inversione."},
+ {k:'t',q:"In un'onda stazionaria, la distanza fra due nodi consecutivi è:",
+  o:["λ/2","λ","λ/4","2λ"],
+  c:0,
+  why:"I nodi si trovano dove sin(kx) = 0, cioè a x = nλ/2: sono quindi separati da mezza lunghezza d'onda. La distanza fra un nodo e il ventre adiacente è invece λ/4. Confondere λ/2 con λ è l'errore più comune in questi problemi."},
+ {k:'t',q:"Nell'espressione y(x,t) = 2A·sin(kx)·cos(ωt), che cosa distingue un'onda stazionaria da una progressiva?",
+  o:["La dipendenza da x e quella da t sono fattorizzate: l'ampiezza dipende dal punto, ma tutti i punti oscillano in fase",
+     "L'ampiezza è costante in tutti i punti","La frequenza dipende dalla posizione",
+     "L'onda stazionaria non oscilla nel tempo"],
+  c:0,
+  why:"In un'onda progressiva la fase kx − ωt lega inscindibilmente spazio e tempo e i punti oscillano sfasati fra loro; nell'onda stazionaria i due fattori sono separati, così l'ampiezza propria di ciascun punto è fissa nel tempo e tutti i punti passano insieme per l'equilibrio."},
+ {k:'t',q:"Per una corda fissa a entrambi gli estremi, le frequenze proprie sono:",
+  o:["f_n = n·v/(2L), con n intero: tutte le armoniche","f_n = (2n−1)·v/(4L): solo le armoniche dispari",
+     "f_n = n·v/(4L): tutte le armoniche","f_n = v/(nL): armoniche a spaziatura decrescente"],
+  c:0,
+  why:"Le condizioni al contorno impongono un nodo a ciascun estremo, quindi nella corda deve entrare un numero intero di mezze lunghezze d'onda: L = nλ/2. Ne segue λ_n = 2L/n e f_n = n·v/(2L), cioè tutti i multipli interi della fondamentale."},
+ {k:'t',q:"Un tubo sonoro chiuso a un'estremità e aperto all'altra produce:",
+  o:["solo le armoniche dispari della fondamentale","tutte le armoniche della fondamentale",
+     "solo le armoniche pari della fondamentale","una sola frequenza, senza armoniche"],
+  c:0,
+  why:"Le condizioni al contorno (nodo di spostamento all'estremo chiuso, ventre a quello aperto) impongono L = (2n−1)λ/4, quindi f_n = (2n−1)v/(4L): compaiono f₁, 3f₁, 5f₁… La mancanza delle armoniche pari è responsabile del timbro caratteristico del clarinetto."},
+ {k:'t',q:"All'estremo aperto di un tubo sonoro si ha:",
+  o:["un ventre di spostamento e un nodo di pressione","un nodo di spostamento e un ventre di pressione",
+     "un ventre sia di spostamento sia di pressione","un nodo sia di spostamento sia di pressione"],
+  c:0,
+  why:"All'estremo aperto l'aria può muoversi liberamente (ventre di spostamento), ma la pressione resta ancorata a quella atmosferica (nodo di pressione). Spostamento e pressione sono sempre sfasati di un quarto di lunghezza d'onda: dove uno ha un nodo, l'altro ha un ventre."},
+ {k:'t',q:"A parità di lunghezza, un tubo chiuso a un'estremità rispetto a uno aperto a entrambe emette una fondamentale:",
+  o:["di un'ottava più bassa","di un'ottava più alta","uguale","di una quinta più alta"],
+  c:0,
+  why:"Per il tubo aperto f₁ = v/(2L), per quello chiuso f₁ = v/(4L): la seconda è metà della prima, cioè un'ottava sotto. È il motivo per cui le canne d'organo chiuse permettono di ottenere note gravi con tubi lunghi la metà."},
+ {k:'t',q:"Perché una corda vibrante non produce onde stazionarie a qualunque frequenza di eccitazione?",
+  o:["Perché solo alle frequenze proprie le riflessioni successive si sommano in fase, dando risonanza",
+     "Perché a frequenze diverse la velocità dell'onda cambia",
+     "Perché le altre frequenze vengono assorbite dagli estremi",
+     "Perché la corda può vibrare soltanto alla frequenza fondamentale"],
+  c:0,
+  why:"L'onda riflessa deve tornare in fase con quella che la sorgente sta emettendo: questo avviene solo se nella lunghezza del sistema entra il numero giusto di mezze (o quarti di) lunghezze d'onda. Altrimenti i contributi si elidono e l'ampiezza resta piccola. È il fenomeno della risonanza."},
+ {k:'t',q:"Da che cosa dipende il timbro di uno strumento musicale?",
+  o:["Dalle ampiezze relative delle armoniche superiori che accompagnano la fondamentale",
+     "Solo dalla frequenza fondamentale","Solo dall'intensità del suono emesso",
+     "Dalla velocità del suono nell'aria della sala"],
+  c:0,
+  why:"Uno strumento reale eccita simultaneamente più modi normali. La distribuzione delle ampiezze fra le armoniche — l'analisi di Fourier del suono, introdotta in acustica da Helmholtz — costituisce il timbro e permette di riconoscere lo strumento anche a occhi chiusi."},
+ {k:'num',q:"Una corda lunga 0,80 m, fissa a entrambi gli estremi, è percorsa da onde a 400 m/s. Qual è la frequenza fondamentale?",
+  o:["250 Hz","500 Hz","125 Hz","320 Hz"],
+  c:0,
+  why:"λ₁ = 2L = 1,60 m, quindi f₁ = v/λ₁ = 400/1,60 = 250 Hz. Il valore di 500 Hz si otterrebbe usando erroneamente λ₁ = L."},
+ {k:'num',q:"Un tubo aperto a entrambe le estremità è lungo 0,34 m (v = 340 m/s). Qual è la sua frequenza fondamentale?",
+  o:["500 Hz","250 Hz","1000 Hz","1500 Hz"],
+  c:0,
+  why:"Per il tubo aperto f₁ = v/(2L) = 340/(2·0,34) = 340/0,68 = 500 Hz. Se il tubo fosse chiuso a un'estremità la fondamentale sarebbe 250 Hz."},
+ {k:'num',q:"Un tubo chiuso a un'estremità ha frequenza fondamentale 100 Hz. Qual è la frequenza propria immediatamente superiore?",
+  o:["300 Hz","200 Hz","150 Hz","400 Hz"],
+  c:0,
+  why:"Nel tubo chiuso sono presenti solo le armoniche dispari: 100, 300, 500 Hz… La successiva a f₁ è quindi 3f₁ = 300 Hz, e i 200 Hz semplicemente non compaiono nello spettro."},
+ {k:'num',q:"Una corda ha frequenza fondamentale 200 Hz. Quadruplicando la tensione, a parità di lunghezza e di densità lineare, la fondamentale diventa:",
+  o:["400 Hz","800 Hz","200 Hz","283 Hz"],
+  c:0,
+  why:"f₁ = (1/2L)·√(F/μ) è proporzionale alla radice quadrata della tensione: quadruplicando F la frequenza si moltiplica per √4 = 2, passando a 400 Hz, cioè un'ottava sopra."},
+ {k:'num',q:"In un'onda stazionaria su una corda i nodi consecutivi distano 0,15 m e la frequenza è 1100 Hz. Qual è la velocità di propagazione?",
+  o:["330 m/s","165 m/s","660 m/s","7333 m/s"],
+  c:0,
+  why:"La distanza fra due nodi consecutivi è λ/2, quindi λ = 0,30 m. Da qui v = λf = 0,30 · 1100 = 330 m/s. Chi usa direttamente λ = 0,15 m ottiene erroneamente 165 m/s."}
+];
+
+/* ============================================================
+   AVVIO
+   ============================================================ */
+makeQuiz('mecc','Quiz: onde meccaniche',
+  'Dieci domande di teoria e cinque problemi numerici sulle grandezze caratteristiche delle onde. Puoi tornare indietro in qualsiasi momento; a ogni nuovo tentativo la posizione delle risposte cambia.');
+makeQuiz('suono','Quiz: onde sonore',
+  'Dieci domande di teoria e cinque problemi numerici su velocità del suono, intensità, decibel ed effetto Doppler. Puoi tornare indietro in qualsiasi momento; a ogni nuovo tentativo la posizione delle risposte cambia.');
+makeQuiz('sovr','Quiz: sovrapposizione, interferenza, battimenti',
+  'Dieci domande di teoria e cinque problemi numerici sulla somma di due onde. Puoi tornare indietro in qualsiasi momento; a ogni nuovo tentativo la posizione delle risposte cambia.');
+makeQuiz('staz','Quiz: onde stazionarie',
+  'Dieci domande di teoria e cinque problemi numerici su corde vibranti e tubi sonori. Puoi tornare indietro in qualsiasi momento; a ogni nuovo tentativo la posizione delle risposte cambia.');
+
+showArea('storia');
+
+})();
+</script>
+</body>
+</html>
